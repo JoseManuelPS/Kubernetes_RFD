@@ -18,22 +18,94 @@ It is recommended to have a proprietary image repository such as Docker Registry
 
 
 
-## nexus_repository
+## nexus_repository 
 
 This short tutorial explains in a simple way how to deploy the Nexus Repository OSS image repository (https://www.sonatype.com/nexus/repository-oss).
 
-_Minikube considerations:_
+**Important: A deployment is going to be carried out without certificates, if you want to carry out a deployment with certificates you can find more information at: https://help.sonatype.com/repomanager3**
 
-_If you are using minikube add its ip to the /etc/hosts file with the following names:_
-- _nexus.local_
-- _docker.local_
 
-_Use the following command to check it:_ 
+### Recommended deploy instrucctions:
+```
+kubectl create --save-config -f <(path_to_nexus_namespaces)>
+kubectl create --save-config -f <(path_to_nexus_deployment)> -f <(path_to_nexus_service)> -f <(path_to_nexus_ingress)>
+```
+
+
+### Example deploy instrucction:
+```
+kubectl create --save-config -f ~/projects/kubernetes_rfd/nexus_repository/ns.nexus_repository.yaml
+kubectl create --save-config -f ~/projects/kubernetes_rfd/nexus_repository/deploy.nexus_repository.yaml -f ~/projects/kubernetes_rfd/nexus_repository/ingress.nexus_repository.yaml -f ~/projects/kubernetes_rfd/nexus_repository/svc.nexus_repository.yaml
+```
+
+
+### Configure and access to your own Nexus Repository OSS.
+
+Now your Nexus Repository OSS it's ready. To use it, you must access to http://nexus.local (Remember modify your /etc/hosts), log in as `admin`, and complete the initial setup. After the configuration is complete, you must create a new Docker repository as type `hosted` with the port `5000`.
+
+Once the deployment has been done, and the new Docker repository created you can connect to it following this steps:
+
+- Create or modify the file /etc/docker/daemon.json to include the following content:
+```
+{
+    "insecure-registries" : [ "docker.local:<(5000_port_mapped_as_nodeport)>" ]
+}
+```
+
+- Reset Docker daemon. 
+
+- Connect to repository:
+```
+docker login docker.local:<(5000_port_mapped_as_nodeport)>
+```
+
+
+### Recommended push instrucctions:
+```
+docker tag <(image_name:version)> docker.local:<(5000_port_mapped_as_nodeport)>/<(repository_name)>/<(image_name:version)>
+docker push docker.local:<(5000_port_mapped_as_nodeport)>/<(repository_name)>/<(image_name:version)>
+```
+
+
+### Example push instrucction:
+```
+docker tag hello_world:v1.0 docker.local:32343/docker_repo/hello_world:v1.0
+docker push docker.local:32343/docker_repo/hello_world:v1.0
+```
+
+
+### Recommended pull instrucctions:
+```
+docker pull docker.local:<(5000_port_mapped_as_nodeport)>/<(repository_name)>/<(image_name:version)>
+```
+
+
+### Example pull instrucction:
+```
+docker pull docker.local:32343/docker_repo/hello_world:v1.0
+```
+
+
+
+## nexus_repository (minikube version)
+
+This short tutorial explains in a simple way how to deploy the Nexus Repository OSS image repository (https://www.sonatype.com/nexus/repository-oss) inside of minikube.
+
+Start minikube with the parameter --insecure-registry, like this:
+```
+minikube start --insecure-registry "10.0.0.0/24"
+```
+
+Add minikube ip to the /etc/hosts file with the following names:
+- nexus.local (It will be used to access the nexus service)
+- docker.local (It will be used to access the docker repository)
+
+Use the following command to check it:
 ```
 minikube ip
 ```
 
-_You must also enable the ingress addon. Use the following command to add it._
+You must also enable the ingress addon. Use the following command to add it.
 ```
 minikube addons enable ingress
 ```
@@ -51,53 +123,74 @@ kubectl create --save-config -f <(path_to_nexus_deployment)> -f <(path_to_nexus_
 ### Example deploy instrucction:
 ```
 kubectl create --save-config -f ~/projects/kubernetes_rfd/nexus_repository/ns.nexus_repository.yaml
-kubectl create --save-config -f ~/projects/kubernetes_rfd/nexus_repository/deploy.nexus_repository.yaml -f ~/projects/kubernetes_rfd/nexus_repository/ingress.nexus_repository.yaml -f ~/projects/kubernetes_rfd/nexus_repository/service.nexus_repository.yaml
+kubectl create --save-config -f ~/projects/kubernetes_rfd/nexus_repository/deploy.nexus_repository.yaml -f ~/projects/kubernetes_rfd/nexus_repository/ingress.nexus_repository.yaml -f ~/projects/kubernetes_rfd/nexus_repository/svc.nexus_repository.yaml
 ```
 
 
-### Configure and access to your own Nexus repository.
-Now your repository is ready. To use it, you must access to http://nexus.local address and complete the initial setup of your new Nexus repository. After the configuration is complete, you must create a new repository as type **docker(hosted)** with the port **5000**.
+### Configure and access to your own Nexus Repository OSS.
 
-Once the deployment has been done, you can connect to it in the following way:
+Now your Nexus Repository OSS it's ready. To use it, you must access to http://nexus.local address, log in as `admin`, and complete the initial setup. 
 
-- Create or modify the file /etc/docker/daemon.json to include the following content:
+Once you have successfully logged in, go to Settings>Security>Realms and enable `Docker Bearer Token Realm`.
+
+After the configuration is complete, you must create a new Docker repository as type `hosted` with the port `5000`.
+
+Once the deployment has been done, and the new Docker repository created you can connect to it following this steps:
+
+- If you want to connect from outside of minikube create or modify the file /etc/docker/daemon.json to include the following content:
+
 ```
 {
-    "insecure-registries" : [ "docker.local" ]
+    "insecure-registries" : [ "docker.local:<(5000_port_mapped_as_nodeport)>" ]
 }
 ```
-   _Minikube considerations:_
 
-   _If you want to connect from outside minikube replace docker.local for docker.local:<(svc-nexus_nodeport)>_
-
-- Reset Docker daemon. 
-
-   _Minikube considerations: If you are using minikube remember that you must start it again after resetting the Docker daemon._
-
-- Conmect to repository:
+- Reset Docker daemon and start again minikube. 
 ```
-docker login docker.local
-```
-   _Minikube considerations:_
-
-   _If you want to connect from outside minikube replace docker.local for docker.local:<(svc-nexus_nodeport)>_
-
-
-### Push and pull images into your own Nexus repository.
-
-To perform the push and pull actions use the following commands.
-```
-docker tag <(image_name:version)> docker.local:5000/<(repository_name)>/<(image_name:version)>
-docker push docker.local:5000/<(repository_name)>/<(image_name:version)>
-
-or
-
-docker pull docker.local:5000/<(repository_name)>/<(image_name:version)>
+systemctl stop docker.service docker.socket
+systemctl start docker.service
+minikube start --insecure-registry "10.0.0.0/24"
 ```
 
-   _Minikube considerations:_
+- Connect from outside of minikube:
+```
+docker login docker.local:<(5000_port_mapped_as_nodeport))>
+```
 
-   _If you want to connect from outside minikube replace docker.local for docker.local:<(svc-nexus_nodeport)>_
+- Connect from inside of minikube:
+```
+eval $(minikube docker-env)
+docker login svc-nexus:5000 
+```
 
-   
+
+### Recommended push instrucctions:
+```
+docker tag <(image_name:version)> svc-nexus:5000/<(repository_name)>/<(image_name:version)>
+docker push svc-nexus:5000/<(repository_name)>/<(image_name:version)>
+```
+
+_If you want to push from outside of minikube replace svc-nexus:5000 for docker.local:<(5000_port_mapped_as_nodeport)>_
+
+
+### Example push instrucction:
+```
+docker tag hello_world:v1.0 svc-nexus:5000/docker_repo/hello_world:v1.0
+docker push svc-nexus:5000/docker_repo/hello_world:v1.0
+```
+
+
+### Recommended pull instrucctions:
+```
+docker pull svc-nexus:5000/<(repository_name)>/<(image_name:version)>
+```
+
+_If you want to pull from outside of minikube replace svc-nexus:5000 for docker.local:<(5000_port_mapped_as_nodeport)>_
+
+
+### Example pull instrucction:
+```
+docker pull svc-nexus:5000/docker_repo/hello_world:v1.0
+```
+
 
