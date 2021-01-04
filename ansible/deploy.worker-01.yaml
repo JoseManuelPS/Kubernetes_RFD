@@ -1,12 +1,12 @@
 ###############################################################################
 ##        Name: deploy.worker-01.yaml                                         #
 ##        Date: 04/01/2021                                                    #
-##     Version: v0.3                                                          #
+##     Version: v0.4                                                          #
 ## Description: File to create a Deployment for:                              #
 ##              -> app: ansible                                               #
 ##              -> role: worker-01                                            #
 ##              -> project: ansible                                           #
-##              -> version: rhel8_ansible_worker_-_v0.2                       #
+##              -> version: rhel8_ansible_worker_-_v0.3                       #
 ##----------------------------------------------------------------------------#
 ##      Editor: José Manuel Plana Santos                                      #
 ##     Contact: dev.josemanuelps@gmail.com                                    #
@@ -24,9 +24,9 @@ metadata:
     app: ansible
     role: worker-01
     project: ansible
-    version: rhel8_ansible_worker_-_v0.2
+    version: rhel8_ansible_worker_-_v0.3
     yaml_name: deploy.worker-01.yaml
-    yaml_version: v0.3
+    yaml_version: v0.4
 spec:
   replicas: 1
   strategy:
@@ -36,20 +36,20 @@ spec:
       app: ansible
       role: worker-01
       project: ansible
-      version: rhel8_ansible_worker_-_v0.2
+      version: rhel8_ansible_worker_-_v0.3
   template:
     metadata:
       labels:
         app: ansible
         role: worker-01
         project: ansible
-        version: rhel8_ansible_worker_-_v0.2
+        version: rhel8_ansible_worker_-_v0.3
     spec:
       restartPolicy: Always
       containers:
       - name: cont-ansible-worker-01
         imagePullPolicy: IfNotPresent  
-        image: 10.109.238.53:5000/docker_repo/rhel8_ansible_worker:v0.2
+        image: 10.109.238.53:5000/docker_repo/rhel8_ansible_worker:v0.3
         ports:
           - containerPort: 22
         resources: {}
