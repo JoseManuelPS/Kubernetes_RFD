@@ -7,7 +7,7 @@
 ##              -> role: master                                               #
 ##              -> project: ansible                                           #
 ##----------------------------------------------------------------------------#
-##       Ports: -> 8081 === 22                                                #
+##       Ports: -> 22 === 22                                                  #
 ##----------------------------------------------------------------------------#
 ##      Editor: José Manuel Plana Santos                                      #
 ##     Contact: dev.josemanuelps@gmail.com                                    #
@@ -35,7 +35,6 @@ spec:
     project: ansible
   ports:
     - protocol: TCP
-      port: 8081
-      targetPort: 22
+      port: 22
 
 

@@ -1,13 +1,13 @@
 ###############################################################################
 ##        Name: svc.worker-02.yaml                                            #
 ##        Date: 04/02/2021                                                    #
-##     Version: v0.1                                                          #
+##     Version: v0.2                                                          #
 ## Description: File to create a Service for:                                 #
 ##              -> app: ansible                                               #
 ##              -> role: worker-02                                            #
 ##              -> project: ansible                                           #
 ##----------------------------------------------------------------------------#
-##       Ports: -> 8081 === 22                                                #
+##       Ports: -> 22 === 22                                                  #
 ##----------------------------------------------------------------------------#
 ##      Editor: José Manuel Plana Santos                                      #
 ##     Contact: dev.josemanuelps@gmail.com                                    #
@@ -26,7 +26,7 @@ metadata:
     role: worker-02
     project: ansible
     yaml_name: svc.worker-02.yaml
-    yaml_version: v0.1
+    yaml_version: v0.2
 spec:
   type: ClusterIP
   selector:
@@ -35,7 +35,6 @@ spec:
     project: ansible
   ports:
     - protocol: TCP
-      port: 8081
-      targetPort: 22
+      port: 22
 
 

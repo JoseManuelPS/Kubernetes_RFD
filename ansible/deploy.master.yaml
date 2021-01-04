@@ -1,7 +1,7 @@
 ###############################################################################
 ##        Name: deploy.master.yaml                                            #
 ##        Date: 03/01/2021                                                    #
-##     Version: v0.1                                                          #
+##     Version: v0.2                                                          #
 ## Description: File to create a Deployment for:                              #
 ##              -> app: ansible                                               #
 ##              -> role: master                                               #
@@ -26,7 +26,7 @@ metadata:
     project: ansible
     version: rhel8_ansible_master_-_v0.1
     yaml_name: deploy.master.yaml
-    yaml_version: v0.1
+    yaml_version: v0.2
 spec:
   replicas: 1
   strategy:
@@ -50,8 +50,10 @@ spec:
       - name: cont-ansible-master
         imagePullPolicy: IfNotPresent  
         image: 10.109.238.53:5000/docker_repo/rhel8_ansible_master:v0.1
+        ports:
+          - containerPort: 22
         command: [ "/bin/bash", "-c", "--" ]
-        args: [ "while true; do sleep 300; done;" ]
+        args: [ "git clone https://github.com/JoseManuelPS/Ansible_RFD ansible_rfd ;while true; do sleep 300; done;" ]
         resources: {}
 
 
