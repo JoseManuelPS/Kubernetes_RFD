@@ -1,0 +1,55 @@
+###############################################################################
+##        Name: deploy.worker-02.yaml                                         #
+##        Date: 03/01/2021                                                    #
+##     Version: v0.1                                                          #
+## Description: File to create a Deployment for:                              #
+##              -> app: ansible                                               #
+##              -> role: worker-02                                            #
+##              -> project: ansible                                           #
+##              -> version: rhel8_ansible_worker_-_v0.1                       #
+##----------------------------------------------------------------------------#
+##      Editor: José Manuel Plana Santos                                      #
+##     Contact: dev.josemanuelps@gmail.com                                    #
+###############################################################################
+
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy.ansible-worker-02
+  namespace: ns-ansible
+  labels:
+    app: ansible
+    role: worker-01
+    project: ansible
+    version: rhel8_ansible_worker_-_v0.1
+    yaml_name: deploy.worker-02.yaml
+    yaml_version: v0.1
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: ansible
+      role: worker-02
+      project: ansible
+      version: rhel8_ansible_worker_-_v0.1
+  template:
+    metadata:
+      labels:
+        app: ansible
+        role: worker-02
+        project: ansible
+        version: rhel8_ansible_worker_-_v0.1
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: cont-ansible-worker-02
+        imagePullPolicy: IfNotPresent  
+        image: 10.109.238.53:5000/docker_repo/rhel8_ansible_worker:v0.1
+        resources: {}
+
+

@@ -1,0 +1,41 @@
+###############################################################################
+##        Name: svc.worker-01.yaml                                            #
+##        Date: 04/01/2021                                                    #
+##     Version: v0.1                                                          #
+## Description: File to create a Service for:                                 #
+##              -> app: ansible                                               #
+##              -> role: worker-01                                            #
+##              -> project: ansible                                           #
+##----------------------------------------------------------------------------#
+##       Ports: -> 8081 === 22                                                #
+##----------------------------------------------------------------------------#
+##      Editor: José Manuel Plana Santos                                      #
+##     Contact: dev.josemanuelps@gmail.com                                    #
+###############################################################################
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-ansible-worker-01
+  namespace: ns-ansible
+  labels:
+    app: ansible
+    role: worker-01
+    project: ansible
+    yaml_name: svc.worker-01.yaml
+    yaml_version: v0.1
+spec:
+  type: ClusterIP
+  selector:
+    app: ansible
+    role: worker-01
+    project: ansible
+  ports:
+    - protocol: TCP
+      port: 8081
+      targetPort: 22
+
+

@@ -1,0 +1,41 @@
+###############################################################################
+##        Name: pvc.ansible-cfg.yaml                                          #
+##        Date: 04/01/2021                                                    #
+##     Version: v0.1                                                          #
+## Description: File to create a Persist Volume Claim for:                    #
+##              -> app: ansible                                               #
+##              -> role: master                                               #
+##              -> project: ansible                                           #
+##----------------------------------------------------------------------------#
+##      Editor: José Manuel Plana Santos                                      #
+##     Contact: dev.josemanuelps@gmail.com                                    #
+###############################################################################
+
+
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-ansible-cfg
+  namespace: ns-ansible
+  labels:
+    app: ansible
+    role: master
+    project: ansible
+    yaml_name: pvc.ansible-cfg.yaml
+    yaml_version: v0.1
+spec:
+  storageClassName: ansible-cfg
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Mi
+  selector:
+    matchLabels:
+      app: ansible
+      role: master
+      project: ansible
+
+

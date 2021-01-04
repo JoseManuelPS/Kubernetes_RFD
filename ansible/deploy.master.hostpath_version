@@ -1,0 +1,69 @@
+###############################################################################
+##        Name: deploy.master.yaml                                            #
+##        Date: 03/01/2021                                                    #
+##     Version: v0.1                                                          #
+## Description: File to create a Deployment for:                              #
+##              -> app: ansible                                               #
+##              -> role: master                                               #
+##              -> project: ansible                                           #
+##              -> version: rhel8_ansible_master_-_v0.1                       #
+##----------------------------------------------------------------------------#
+##      Editor: José Manuel Plana Santos                                      #
+##     Contact: dev.josemanuelps@gmail.com                                    #
+###############################################################################
+
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy.ansible-master
+  namespace: ns-ansible
+  labels:
+    app: ansible
+    role: master
+    project: ansible
+    version: rhel8_ansible_master_-_v0.1
+    yaml_name: deploy.master.yaml
+    yaml_version: v0.1
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: ansible
+      role: master
+      project: ansible
+      version: rhel8_ansible_master_-_v0.1
+  template:
+    metadata:
+      labels:
+        app: ansible
+        role: master
+        project: ansible
+        version: rhel8_ansible_master_-_v0.1
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: cont-ansible-master
+        imagePullPolicy: IfNotPresent  
+        image: 10.109.238.53:5000/docker_repo/rhel8_ansible_master:v0.1
+        command: [ "/bin/bash", "-c", "--" ]
+        args: [ "while true; do sleep 300; done;" ]
+        resources: {}
+        volumeMounts:
+        - name: hosts
+          mountPath: /etc/ansible/hosts
+        - name: ansible-cfg
+          mountPath: /etc/ansible/ansible.cfg
+      volumes:
+      - name: hosts
+        persistentVolumeClaim:
+            claimName: pvc-hosts
+      - name: ansible-cfg
+        persistentVolumeClaim:
+            claimName: pvc-ansible-cfg
+
+

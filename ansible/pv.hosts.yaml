@@ -1,0 +1,38 @@
+###############################################################################
+##        Name: pv.hosts.yaml                                                 #
+##        Date: 04/01/2021                                                    #
+##     Version: v0.1                                                          #
+## Description: File to create a Persist Volume for:                          #
+##              -> app: ansible                                               #
+##              -> role: master                                               #
+##              -> project: ansible                                           #
+##----------------------------------------------------------------------------#
+##      Editor: José Manuel Plana Santos                                      #
+##     Contact: dev.josemanuelps@gmail.com                                    #
+###############################################################################
+
+
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-hosts
+  namespace: ns-ansible
+  labels:
+    app: ansible
+    role: master
+    project: ansible
+    yaml_name: pv.hosts.yaml
+    yaml_version: v0.1
+spec:
+  capacity:
+    storage: 10Mi
+  storageClassName: hosts
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: '/home/josemanuelps/projects/kubernetes_rfd/ansible/hosts'
+    type: File
+
+
