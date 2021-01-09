@@ -18,7 +18,7 @@ It is recommended to have a proprietary image repository such as Docker Registry
 
 
 
-## nexus_repository 
+## nexus_repository_oss 
 
 This short tutorial explains in a simple way how to deploy the Nexus Repository OSS image repository (https://www.sonatype.com/nexus/repository-oss).
 
@@ -86,8 +86,15 @@ docker pull docker.local:32343/docker_repo/hello_world:v1.0
 ```
 
 
+---
+_Last test info:_
+- _Date: unknown_
+- _Base image versión: unknown_
+---
 
-## nexus_repository (minikube version)
+
+
+## nexus_repository_oss (minikube version) 
 
 This short tutorial explains in a simple way how to deploy the Nexus Repository OSS image repository (https://www.sonatype.com/nexus/repository-oss) inside of minikube.
 
@@ -188,5 +195,12 @@ docker pull docker.local:30500/<(repository_name)>/<(image_name:version)>
 ```
 docker pull docker.local:30500/docker_repo/hello_world:v1.0
 ```
+
+
+---
+_Last test info:_
+- _Date: 09/01/2021_
+- _Base image versión: sonatype\_nexus3:3.29.0_
+---
 
 
