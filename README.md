@@ -88,8 +88,9 @@ docker pull docker.local:32343/docker_repo/hello_world:v1.0
 
 ---
 _Last test info:_
-- _Date: unknown_
-- _Base image versión: unknown_
+- _Date: **unknown**_
+- _Base image versión: **unknown**_
+
 ---
 
 
@@ -199,8 +200,9 @@ docker pull docker.local:30500/docker_repo/hello_world:v1.0
 
 ---
 _Last test info:_
-- _Date: 09/01/2021_
-- _Base image versión: sonatype\_nexus3:3.29.0_
+- _Date: **09/01/2021**_
+- _Base image versión: **sonatype\_nexus3:3.29.0**_
+
 ---
 
 
