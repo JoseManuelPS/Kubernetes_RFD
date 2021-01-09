@@ -1,7 +1,7 @@
 ###############################################################################
 ##        Name: ns.nexus_repository.yaml                                      #
-##        Date: 29/12/2020                                                    #
-##     Version: v0.1                                                          #
+##        Date: 09/01/2021                                                    #
+##     Version: v1.0                                                          #
 ## Description: File to create a namespace for:                               #
 ##              + owner: nexus                                                #
 ##              + target: kubernetes_rfd                                      #
@@ -21,4 +21,7 @@ metadata:
     owner: nexus
     target: kubernetes_rfd
     yaml_name: ns.nexus_repository.yaml
-    yaml_version: v0.1
+    yaml_version: v1.0
+...
+
+

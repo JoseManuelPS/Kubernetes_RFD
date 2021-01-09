@@ -48,7 +48,7 @@ Once the deployment has been done, and the new Docker repository created you can
 - Create or modify the file /etc/docker/daemon.json to include the following content:
 ```
 {
-    "insecure-registries" : [ "docker.local:<(5000_port_mapped_as_nodeport)>" ]
+    "insecure-registries" : [ "docker.local:30500" ]
 }
 ```
 
@@ -56,27 +56,27 @@ Once the deployment has been done, and the new Docker repository created you can
 
 - Connect to repository:
 ```
-docker login docker.local:<(5000_port_mapped_as_nodeport)>
+docker login docker.local:30500
 ```
 
 
 ### Recommended push instrucctions:
 ```
-docker tag <(image_name:version)> docker.local:<(5000_port_mapped_as_nodeport)>/<(repository_name)>/<(image_name:version)>
-docker push docker.local:<(5000_port_mapped_as_nodeport)>/<(repository_name)>/<(image_name:version)>
+docker tag <(image_name:version)> docker.local:30500/<(repository_name)>/<(image_name:version)>
+docker push docker.local:30500/<(repository_name)>/<(image_name:version)>
 ```
 
 
 ### Example push instrucction:
 ```
-docker tag hello_world:v1.0 docker.local:32343/docker_repo/hello_world:v1.0
-docker push docker.local:32343/docker_repo/hello_world:v1.0
+docker tag hello_world:v1.0 docker.local:30500/docker_repo/hello_world:v1.0
+docker push docker.local:30500/docker_repo/hello_world:v1.0
 ```
 
 
 ### Recommended pull instrucctions:
 ```
-docker pull docker.local:<(5000_port_mapped_as_nodeport)>/<(repository_name)>/<(image_name:version)>
+docker pull docker.local:30500/<(repository_name)>/<(image_name:version)>
 ```
 
 
@@ -93,7 +93,7 @@ This short tutorial explains in a simple way how to deploy the Nexus Repository 
 
 Start minikube with the parameter --insecure-registry, like this:
 ```
-minikube start --insecure-registry "10.0.0.0/24"
+minikube start --insecure-registry "docker.local:30500"
 ```
 
 Add minikube ip to the /etc/hosts file with the following names:
@@ -141,7 +141,7 @@ Once the deployment has been done, and the new Docker repository created you can
 
 ```
 {
-    "insecure-registries" : [ "docker.local:<(5000_port_mapped_as_nodeport)>" ]
+    "insecure-registries" : [ "docker.local:30500>" ]
 }
 ```
 
@@ -149,48 +149,44 @@ Once the deployment has been done, and the new Docker repository created you can
 ```
 systemctl stop docker.service docker.socket
 systemctl start docker.service
-minikube start --insecure-registry "10.0.0.0/24"
+minikube start
 ```
 
 - Connect from outside of minikube:
 ```
-docker login docker.local:<(5000_port_mapped_as_nodeport))>
+docker login docker.local:30500
 ```
 
 - Connect from inside of minikube:
 ```
 eval $(minikube docker-env)
-docker login svc-nexus:5000 
+docker login docker.local:30500
 ```
 
 
 ### Recommended push instrucctions:
 ```
-docker tag <(image_name:version)> svc-nexus:5000/<(repository_name)>/<(image_name:version)>
-docker push svc-nexus:5000/<(repository_name)>/<(image_name:version)>
+docker tag <(image_name:version)> docker.local:30500/<(repository_name)>/<(image_name:version)>
+docker push docker.local:30500/<(repository_name)>/<(image_name:version)>
 ```
-
-_If you want to push from outside of minikube replace svc-nexus:5000 for docker.local:<(5000_port_mapped_as_nodeport)>_
 
 
 ### Example push instrucction:
 ```
-docker tag hello_world:v1.0 svc-nexus:5000/docker_repo/hello_world:v1.0
-docker push svc-nexus:5000/docker_repo/hello_world:v1.0
+docker tag hello_world:v1.0 docker.local:30500/docker_repo/hello_world:v1.0
+docker push docker.local:30500/docker_repo/hello_world:v1.0
 ```
 
 
 ### Recommended pull instrucctions:
 ```
-docker pull svc-nexus:5000/<(repository_name)>/<(image_name:version)>
+docker pull docker.local:30500/<(repository_name)>/<(image_name:version)>
 ```
-
-_If you want to pull from outside of minikube replace svc-nexus:5000 for docker.local:<(5000_port_mapped_as_nodeport)>_
 
 
 ### Example pull instrucction:
 ```
-docker pull svc-nexus:5000/docker_repo/hello_world:v1.0
+docker pull docker.local:30500/docker_repo/hello_world:v1.0
 ```
 
 

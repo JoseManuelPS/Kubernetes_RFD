@@ -1,7 +1,7 @@
 ###############################################################################
 ##        Name: svc.nexus_repository.yaml                                     #
-##        Date: 29/12/2020                                                    #
-##     Version: v0.1                                                          #
+##        Date: 09/01/2021                                                    #
+##     Version: v1.0                                                          #
 ## Description: File to create a service for:                                 #
 ##              + app: nexus_repository                                       #
 ##              + owner: nexus                                                #
@@ -27,7 +27,7 @@ metadata:
     owner: nexus
     target: kubernetes_rfd
     yaml_name: svc.nexus_repository.yaml
-    yaml_version: v0.1
+    yaml_version: v1.0
 spec:
   type: NodePort
   selector:
@@ -41,7 +41,8 @@ spec:
       protocol: TCP
     - name: docker
       port: 5000
-      targetPort: 5000
+      nodePort: 30500
       protocol: TCP
+...
 
 
