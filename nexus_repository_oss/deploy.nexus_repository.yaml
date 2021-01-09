@@ -1,0 +1,63 @@
+###############################################################################
+##        Name: deploy.nexus_repository.yaml                                  #
+##        Date: 09/01/2021                                                    #
+##     Version: v1.0                                                          #
+## Description: File to create a deployment for:                              #
+##              + app: nexus_repository                                       #
+##              + owner: nexus                                                #
+##              + target: kubernetes_rfd                                      #
+##----------------------------------------------------------------------------#
+##     Version: -> sonatype_nexus3_-_3.29.0                                   #
+##----------------------------------------------------------------------------#
+##      Editor: José Manuel Plana Santos                                      #
+##     Contact: dev.josemanuelps@gmail.com                                    #
+###############################################################################
+
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-nexus
+  namespace: ns-nexus
+  labels:
+    app: nexus_repository
+    owner: nexus
+    target: kubernetes_rfd
+    version: sonatype_nexus3_-_3.29.0
+    yaml_name: deploy.nexus_repository.yaml
+    yaml_version: v1.0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nexus_repository
+      owner: nexus
+      target: kubernetes_rfd
+      version: sonatype_nexus3_-_3.29.0
+  template:
+    metadata:
+      labels:
+        app: nexus_repository
+        owner: nexus
+        target: kubernetes_rfd
+        version: sonatype_nexus3_-_3.29.0
+    spec:
+      containers:
+      - name: cont-nexus
+        image: sonatype/nexus3:3.29.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8081
+        - containerPort: 5000
+        volumeMounts:
+          - name: nexus-emptydir
+            mountPath: /nexus-data
+        resources: {}
+      volumes:
+        - name: nexus-emptydir
+          emptyDir: {}
+...
+
+

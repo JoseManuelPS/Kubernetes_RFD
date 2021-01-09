@@ -1,0 +1,55 @@
+###############################################################################
+##        Name: ingress.nexus_repository.yaml                                 #
+##        Date: 09/01/2021                                                    #
+##     Version: v1.0                                                          #
+## Description: File to create a service for:                                 #
+##              + app: nexus_repository                                       #
+##              + owner: nexus                                                #
+##              + target: kubernetes_rfd                                      #
+##----------------------------------------------------------------------------#
+##      Editor: José Manuel Plana Santos                                      #
+##     Contact: dev.josemanuelps@gmail.com                                    #
+###############################################################################
+
+
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-nexus
+  namespace: ns-nexus
+  annotations:
+    ingress.kubernetes.io/proxy-body-size: 100m
+    kubernetes.io/ingress.class: "nginx"
+  labels:
+    app: nexus_repository
+    owner: nexus
+    target: kubernetes_rfd
+    yaml_name: ingress.nexus_repository.yaml
+    yaml_version: v1.0
+spec:
+  rules:
+  - host: "nexus.local"
+    http:
+      paths:
+      - path: "/"
+        pathType: Prefix
+        backend:
+          service:
+            name: svc-nexus
+            port:
+              number: 80
+  - host: "docker.local"
+    http:
+      paths:
+      - path: "/"
+        pathType: Prefix
+        backend:
+          service:
+            name: svc-nexus
+            port:
+              number: 5000
+...
+
+
