@@ -1,7 +1,7 @@
 ###############################################################################
 ##        Name: svc.worker-02.yaml                                            #
 ##        Date: 04/02/2021                                                    #
-##     Version: v0.2                                                          #
+##     Version: b2                                                            #
 ## Description: File to create a Service for:                                 #
 ##              -> app: ansible                                               #
 ##              -> role: worker-02                                            #
@@ -26,7 +26,7 @@ metadata:
     role: worker-02
     project: ansible
     yaml_name: svc.worker-02.yaml
-    yaml_version: v0.2
+    yaml_version: b2
 spec:
   type: ClusterIP
   selector:
@@ -36,5 +36,6 @@ spec:
   ports:
     - protocol: TCP
       port: 22
+...
 
 
