@@ -1,14 +1,14 @@
 ###############################################################################
-##        Name: deploy.master.yaml                                            #
-##        Date: 23/01/2021                                                    #
+##        Name: deploy.node-03.yaml                                           #
+##        Date: 24/01/2021                                                    #
 ##     Version: b6                                                            #
 ## Description: File to create a Deployment for:                              #
 ##              -> app: ansible                                               #
-##              -> image: rhel_ansible_master-_-b4                            #
+##              -> image: ubuntu_ansible_node-_-b5                            #
 ##              -> project: ansible                                           #
-##              -> role: master                                               #
+##              -> role: node-03                                              #
 ##----------------------------------------------------------------------------#
-##       Image: -> rhel_ansible_master-_-b4                                   #
+##       Image: -> ubuntu_ansible_node-_-b5                                   #
 ##----------------------------------------------------------------------------#
 ##      Editor: José Manuel Plana Santos                                      #
 ##     Contact: dev.josemanuelps@gmail.com                                    #
@@ -20,49 +20,40 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deploy.ansible-master
+  name: deploy.ansible-node-03
   namespace: ns-ansible
   labels:
     app: ansible
-    image: rhel_ansible_master-_-b4
+    image: ubuntu_ansible_node-_-b5
     project: ansible
-    role: master
-    yaml_name: deploy.master.yaml
+    role: node-03
+    yaml_name: deploy.node-03.yaml
     yaml_version: b6
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: ansible
-      image: rhel_ansible_master-_-b4
+      image: ubuntu_ansible_node-_-b5
       project: ansible
-      role: master
+      role: node-03
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
         app: ansible
-        image: rhel_ansible_master-_-b4
+        image: ubuntu_ansible_node-_-b5
         project: ansible
-        role: master
+        role: node-03
     spec:
       containers:
-      - name: cont-ansible-master
-        image: docker.local:30500/docker_repo/rhel/ansible/master:b4
-        command: [ "/bin/bash", "-c", "--" ]
-        args: [ "while true; do sleep 300; done;" ]
-        imagePullPolicy: IfNotPresent
+      - name: cont-ansible-node-03
+        image: docker.local:30500/docker_repo/ubuntu/ansible/node:b5
+        imagePullPolicy: IfNotPresent 
         ports:
           - containerPort: 22
-        volumeMounts:
-          - name: projects
-            mountPath: '/home/user/projects'
       restartPolicy: Always
-      volumes:
-      - name: projects
-        persistentVolumeClaim:
-          claimName: pvc-projects
 ...
 
 

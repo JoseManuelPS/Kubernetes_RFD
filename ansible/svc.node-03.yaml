@@ -1,11 +1,11 @@
 ###############################################################################
-##        Name: svc.worker-02.yaml                                            #
-##        Date: 04/02/2021                                                    #
-##     Version: b2                                                            #
+##        Name: svc.node-03.yaml                                              #
+##        Date: 04/01/2021                                                    #
+##     Version: b1                                                            #
 ## Description: File to create a Service for:                                 #
 ##              -> app: ansible                                               #
-##              -> role: worker-02                                            #
 ##              -> project: ansible                                           #
+##              -> role: node-03                                              #
 ##----------------------------------------------------------------------------#
 ##       Ports: -> 22 === 22                                                  #
 ##----------------------------------------------------------------------------#
@@ -19,23 +19,23 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: svc-ansible-worker-02
+  name: svc-ansible-node-03
   namespace: ns-ansible
   labels:
     app: ansible
-    role: worker-02
     project: ansible
-    yaml_name: svc.worker-02.yaml
-    yaml_version: b2
+    role: node-03
+    yaml_name: svc.node-03.yaml
+    yaml_version: b1
 spec:
-  type: ClusterIP
+  ports:
+    - port: 22
+      protocol: TCP
   selector:
     app: ansible
-    role: worker-02
     project: ansible
-  ports:
-    - protocol: TCP
-      port: 22
+    role: node-03
+  type: ClusterIP
 ...
 
 

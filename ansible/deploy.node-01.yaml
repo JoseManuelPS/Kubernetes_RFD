@@ -1,12 +1,14 @@
 ###############################################################################
-##        Name: deploy.worker-02.yaml                                         #
-##        Date: 09/01/2021                                                    #
-##     Version: b5                                                            #
+##        Name: deploy.node-01.yaml                                           #
+##        Date: 24/01/2021                                                    #
+##     Version: b6                                                            #
 ## Description: File to create a Deployment for:                              #
 ##              -> app: ansible                                               #
-##              -> role: worker-02                                            #
+##              -> image: rhel_ansible_node-_-b5                              #
 ##              -> project: ansible                                           #
-##              -> version: rhel8_ansible_worker_-_v0.3                       #
+##              -> role: node-01                                              #
+##----------------------------------------------------------------------------#
+##       Image: -> rhel_ansible_node-_-b5                                     #
 ##----------------------------------------------------------------------------#
 ##      Editor: José Manuel Plana Santos                                      #
 ##     Contact: dev.josemanuelps@gmail.com                                    #
@@ -18,41 +20,40 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deploy.ansible-worker-02
+  name: deploy.ansible-node-01
   namespace: ns-ansible
   labels:
     app: ansible
-    role: worker-01
+    image: rhel_ansible_node-_-b5
     project: ansible
-    version: rhel8_ansible_worker_-_v0.3
-    yaml_name: deploy.worker-02.yaml
-    yaml_version: b5
+    role: node-01
+    yaml_name: deploy.node-01.yaml
+    yaml_version: b6
 spec:
   replicas: 1
-  strategy:
-    type: Recreate
   selector:
     matchLabels:
       app: ansible
-      role: worker-02
+      image: rhel_ansible_node-_-b5
       project: ansible
-      version: rhel8_ansible_worker_-_v0.3
+      role: node-01
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
         app: ansible
-        role: worker-02
+        image: rhel_ansible_node-_-b5
         project: ansible
-        version: rhel8_ansible_worker_-_v0.3
+        role: node-01
     spec:
-      restartPolicy: Always
       containers:
-      - name: cont-ansible-worker-02
-        imagePullPolicy: IfNotPresent  
-        image: docker.local:30500/docker_repo/rhel8_ansible_worker:v0.3
+      - name: cont-ansible-node-01
+        image: docker.local:30500/docker_repo/rhel/ansible/node:b5
+        imagePullPolicy: IfNotPresent 
         ports:
           - containerPort: 22
-        resources: {}
+      restartPolicy: Always
 ...
 
 

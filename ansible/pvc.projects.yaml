@@ -4,8 +4,8 @@
 ##     Version: b2                                                            #
 ## Description: File to create a Persist Volume Claim for:                    #
 ##              -> app: ansible                                               #
-##              -> role: master                                               #
 ##              -> project: ansible                                           #
+##              -> role: master                                               #
 ##----------------------------------------------------------------------------#
 ##      Editor: José Manuel Plana Santos                                      #
 ##     Contact: dev.josemanuelps@gmail.com                                    #
@@ -21,14 +21,13 @@ metadata:
   namespace: ns-ansible
   labels:
     app: ansible
-    role: master
     project: ansible
+    role: master
     yaml_name: pvc.projects.yaml
     yaml_version: b2
 spec:
-  storageClassName: projects
   accessModes:
-    - ReadWriteMany
+      - ReadWriteMany
   resources:
     requests:
       storage: 200Mi
@@ -37,6 +36,7 @@ spec:
       app: ansible
       role: master
       project: ansible
+  storageClassName: projects
 ...
 
 

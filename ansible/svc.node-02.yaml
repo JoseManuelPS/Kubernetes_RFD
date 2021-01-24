@@ -1,11 +1,11 @@
 ###############################################################################
-##        Name: svc.master.yaml                                               #
+##        Name: svc.node-02.yaml                                              #
 ##        Date: 04/01/2021                                                    #
 ##     Version: b1                                                            #
 ## Description: File to create a Service for:                                 #
 ##              -> app: ansible                                               #
 ##              -> project: ansible                                           #
-##              -> role: master                                               #
+##              -> role: node-02                                              #
 ##----------------------------------------------------------------------------#
 ##       Ports: -> 22 === 22                                                  #
 ##----------------------------------------------------------------------------#
@@ -19,22 +19,22 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: svc-ansible-master
+  name: svc-ansible-node-02
   namespace: ns-ansible
   labels:
     app: ansible
     project: ansible
-    role: master
-    yaml_name: svc.master.yaml
+    role: node-02
+    yaml_name: svc.node-02.yaml
     yaml_version: b1
 spec:
   ports:
-  - port: 22
-    protocol: TCP
+    - port: 22
+      protocol: TCP
   selector:
     app: ansible
-    role: master
     project: ansible
+    role: node-02
   type: ClusterIP
 ...
 

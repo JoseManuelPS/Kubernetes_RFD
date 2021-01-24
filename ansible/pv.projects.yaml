@@ -4,8 +4,8 @@
 ##     Version: b2                                                            #
 ## Description: File to create a Persist Volume for:                          #
 ##              -> app: ansible                                               #
-##              -> role: master                                               #
 ##              -> project: ansible                                           #
+##              -> role: master                                               #
 ##----------------------------------------------------------------------------#
 ##      Editor: José Manuel Plana Santos                                      #
 ##     Contact: dev.josemanuelps@gmail.com                                    #
@@ -21,18 +21,18 @@ metadata:
   namespace: ns-ansible
   labels:
     app: ansible
-    role: master
     project: ansible
+    role: master
     yaml_name: pv.projects.yaml
     yaml_version: b2
 spec:
-  capacity:
-    storage: 200Mi
-  storageClassName: projects
   accessModes:
     - ReadWriteMany
+  capacity:
+    storage: 200Mi
   hostPath:
     path: '/home/docker/projects'
+  storageClassName: projects
 ...
 
 
