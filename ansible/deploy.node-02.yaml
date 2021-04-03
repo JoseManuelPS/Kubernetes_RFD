@@ -1,14 +1,14 @@
 ###############################################################################
 ##        Name: deploy.node-02.yaml                                           #
 ##        Date: 24/01/2021                                                    #
-##     Version: b6                                                            #
+##     Version: v1.0                                                          #
 ## Description: File to create a Deployment for:                              #
 ##              -> app: ansible                                               #
-##              -> image: rhel_ansible_node-_-b5                              #
+##              -> image: rhel_ansible_node-_-v1.0                            #
 ##              -> project: ansible                                           #
 ##              -> role: node-02                                              #
 ##----------------------------------------------------------------------------#
-##       Image: -> rhel_ansible_node-_-b5                                     #
+##       Image: -> rhel_ansible_node-_-v1.0                                   #
 ##----------------------------------------------------------------------------#
 ##      Editor: José Manuel Plana Santos                                      #
 ##     Contact: dev.josemanuelps@gmail.com                                    #
@@ -24,17 +24,15 @@ metadata:
   namespace: ns-ansible
   labels:
     app: ansible
-    image: rhel_ansible_node-_-b5
+    image: rhel_ansible_node-_-v1.0
     project: ansible
     role: node-02
-    yaml_name: deploy.node-02.yaml
-    yaml_version: b6
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: ansible
-      image: rhel_ansible_node-_-b5
+      image: rhel_ansible_node-_-v1.0
       project: ansible
       role: node-02
   strategy:
@@ -43,13 +41,13 @@ spec:
     metadata:
       labels:
         app: ansible
-        image: rhel_ansible_node-_-b5
+        image: rhel_ansible_node-_-v1.0
         project: ansible
         role: node-02
     spec:
       containers:
       - name: cont-ansible-node-02
-        image: docker.local:30500/docker_repo/rhel/ansible/node:b5
+        image: docker.local:30500/docker_repo/rhel/ansible/node:v1.0
         imagePullPolicy: IfNotPresent 
         ports:
           - containerPort: 22

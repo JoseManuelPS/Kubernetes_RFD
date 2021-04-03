@@ -1,7 +1,7 @@
 ###############################################################################
 ##        Name: svc.master.yaml                                               #
 ##        Date: 04/01/2021                                                    #
-##     Version: b1                                                            #
+##     Version: v1.0                                                          #
 ## Description: File to create a Service for:                                 #
 ##              -> app: ansible                                               #
 ##              -> project: ansible                                           #
@@ -25,8 +25,6 @@ metadata:
     app: ansible
     project: ansible
     role: master
-    yaml_name: svc.master.yaml
-    yaml_version: b1
 spec:
   ports:
   - port: 22

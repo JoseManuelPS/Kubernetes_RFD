@@ -1,14 +1,14 @@
 ###############################################################################
 ##        Name: deploy.master.yaml                                            #
 ##        Date: 23/01/2021                                                    #
-##     Version: b6                                                            #
+##     Version: v1.0                                                          #
 ## Description: File to create a Deployment for:                              #
 ##              -> app: ansible                                               #
-##              -> image: rhel_ansible_master-_-b4                            #
+##              -> image: rhel_ansible_master-_-v1.0                          #
 ##              -> project: ansible                                           #
 ##              -> role: master                                               #
 ##----------------------------------------------------------------------------#
-##       Image: -> rhel_ansible_master-_-b4                                   #
+##       Image: -> rhel_ansible_master-_-v1.0                                 #
 ##----------------------------------------------------------------------------#
 ##      Editor: José Manuel Plana Santos                                      #
 ##     Contact: dev.josemanuelps@gmail.com                                    #
@@ -24,17 +24,15 @@ metadata:
   namespace: ns-ansible
   labels:
     app: ansible
-    image: rhel_ansible_master-_-b4
+    image: rhel_ansible_master-_-v1.0
     project: ansible
     role: master
-    yaml_name: deploy.master.yaml
-    yaml_version: b6
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: ansible
-      image: rhel_ansible_master-_-b4
+      image: rhel_ansible_master-_-v1.0
       project: ansible
       role: master
   strategy:
@@ -43,13 +41,13 @@ spec:
     metadata:
       labels:
         app: ansible
-        image: rhel_ansible_master-_-b4
+        image: rhel_ansible_master-_-v1.0
         project: ansible
         role: master
     spec:
       containers:
       - name: cont-ansible-master
-        image: docker.local:30500/docker_repo/rhel/ansible/master:b4
+        image: docker.local:30500/docker_repo/rhel/ansible/master:v1.0
         command: [ "/bin/bash", "-c", "--" ]
         args: [ "while true; do sleep 300; done;" ]
         imagePullPolicy: IfNotPresent

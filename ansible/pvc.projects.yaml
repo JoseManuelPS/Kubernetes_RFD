@@ -1,7 +1,7 @@
 ###############################################################################
 ##        Name: pvc.projects.yaml                                             #
 ##        Date: 09/01/2021                                                    #
-##     Version: b2                                                            #
+##     Version: v1.0                                                          #
 ## Description: File to create a Persist Volume Claim for:                    #
 ##              -> app: ansible                                               #
 ##              -> project: ansible                                           #
@@ -23,8 +23,6 @@ metadata:
     app: ansible
     project: ansible
     role: master
-    yaml_name: pvc.projects.yaml
-    yaml_version: b2
 spec:
   accessModes:
       - ReadWriteMany
