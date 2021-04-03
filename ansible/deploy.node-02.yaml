@@ -1,0 +1,57 @@
+###############################################################################
+##        Name: deploy.node-02.yaml                                           #
+##        Date: 24/01/2021                                                    #
+##     Version: v1.0                                                          #
+## Description: File to create a Deployment for:                              #
+##              -> app: ansible                                               #
+##              -> image: rhel_ansible_node-_-v1.0                            #
+##              -> project: ansible                                           #
+##              -> role: node-02                                              #
+##----------------------------------------------------------------------------#
+##       Image: -> rhel_ansible_node-_-v1.0                                   #
+##----------------------------------------------------------------------------#
+##      Editor: José Manuel Plana Santos                                      #
+##     Contact: dev.josemanuelps@gmail.com                                    #
+###############################################################################
+
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy.ansible-node-02
+  namespace: ns-ansible
+  labels:
+    app: ansible
+    image: rhel_ansible_node-_-v1.0
+    project: ansible
+    role: node-02
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ansible
+      image: rhel_ansible_node-_-v1.0
+      project: ansible
+      role: node-02
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ansible
+        image: rhel_ansible_node-_-v1.0
+        project: ansible
+        role: node-02
+    spec:
+      containers:
+      - name: cont-ansible-node-02
+        image: docker.local:30500/docker_repo/rhel/ansible/node:v1.0
+        imagePullPolicy: IfNotPresent 
+        ports:
+          - containerPort: 22
+      restartPolicy: Always
+...
+
+

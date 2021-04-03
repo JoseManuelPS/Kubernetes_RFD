@@ -18,6 +18,33 @@ It is recommended to have a proprietary image repository such as Docker Registry
 
 
 
+## ansible
+
+This short tutorial explains in a simple way how to deploy an ansible laboratory based on https://github.com/JoseManuelPS/Docker_RFD ansible.
+
+### Recommended deploy instrucctions:
+```
+kubectl create --save-config -f <(path_to_ansible_namespaces)>
+kubectl apply -f <(path_to_ansible_directory)>
+```
+
+
+### Example deploy instrucction:
+```
+kubectl create --save-config -f ~/projects/kubernetes_rfd/ansible/ns.ansible.yaml
+kubectl apply -f ~/projects/kubernetes_rfd/ansible/
+```
+
+
+---
+_Last test info:_
+- _Date: **unknown**_
+- _Base image versión: **unknown**_
+
+---
+
+
+
 ## nexus_repository_oss 
 
 This short tutorial explains in a simple way how to deploy the Nexus Repository OSS image repository (https://www.sonatype.com/nexus/repository-oss).
