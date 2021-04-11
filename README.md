@@ -109,7 +109,7 @@ docker pull docker.local:30500/<(repository_name)>/<(image_name:version)>
 
 ### Example pull instrucction:
 ```
-docker pull docker.local:32343/docker_repo/hello_world:v1.0
+docker pull docker.local:30500/docker_repo/hello_world:v1.0
 ```
 
 
@@ -184,7 +184,7 @@ Once the deployment has been done, and the new Docker repository created you can
 ```
 systemctl stop docker.service docker.socket
 systemctl start docker.service
-minikube start
+minikube start --insecure-registry "docker.local:30500"
 ```
 
 - Connect from outside of minikube:
@@ -227,8 +227,9 @@ docker pull docker.local:30500/docker_repo/hello_world:v1.0
 
 ---
 _Last test info:_
-- _Date: **06/04/2021**_
+- _Date: **11/04/2021**_
 - _Base image versión: **sonatype\_nexus3:3.29.0**_
+- _Minikube versión: **v1.18.1**_
 
 ---
 
