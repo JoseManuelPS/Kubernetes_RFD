@@ -1,0 +1,39 @@
+###############################################################################
+##        Name: svc.master.yaml                                               #
+##        Date: 04/01/2021                                                    #
+##     Version: v1.0                                                          #
+## Description: File to create a Service for:                                 #
+##              -> app: ansible                                               #
+##              -> project: ansible                                           #
+##              -> role: master                                               #
+##----------------------------------------------------------------------------#
+##       Ports: -> 22 === 22                                                  #
+##----------------------------------------------------------------------------#
+##      Editor: José Manuel Plana Santos                                      #
+##     Contact: dev.josemanuelps@gmail.com                                    #
+###############################################################################
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-ansible-master
+  namespace: ns-ansible
+  labels:
+    app: ansible
+    project: ansible
+    role: master
+spec:
+  ports:
+  - port: 22
+    protocol: TCP
+  selector:
+    app: ansible
+    role: master
+    project: ansible
+  type: ClusterIP
+...
+
+

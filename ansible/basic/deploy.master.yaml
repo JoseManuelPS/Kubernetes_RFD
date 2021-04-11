@@ -1,0 +1,66 @@
+###############################################################################
+##        Name: deploy.master.yaml                                            #
+##        Date: 11/04/2021                                                    #
+##     Version: latest                                                        #
+## Description: File to create a Deployment for:                              #
+##              -> app: ansible                                               #
+##              -> image: rhel_ansible_basic_master-_-latest                  #
+##              -> project: ansible                                           #
+##              -> role: master                                               #
+##----------------------------------------------------------------------------#
+##       Image: -> rhel_ansible_basic_master-_-latest                         #
+##----------------------------------------------------------------------------#
+##      Editor: José Manuel Plana Santos                                      #
+##     Contact: dev.josemanuelps@gmail.com                                    #
+###############################################################################
+
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy.ansible-master
+  namespace: ns-ansible
+  labels:
+    app: ansible
+    image: rhel_ansible_basic_master-_-latest
+    project: ansible
+    role: master
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ansible
+      image: rhel_ansible_basic_master-_-latest
+      project: ansible
+      role: master
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: ansible
+        image: rhel_ansible_basic_master-_-latest
+        project: ansible
+        role: master
+    spec:
+      containers:
+      - name: cont-ansible-master
+        image: docker.local:30500/docker_repo/rhel/ansible/basic/master:latest
+        command: [ "/bin/bash", "-c", "--" ]
+        args: [ "while true; do sleep 300; done;" ]
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 22
+        volumeMounts:
+          - name: projects
+            mountPath: '/home/user/projects'
+      restartPolicy: Always
+      volumes:
+      - name: projects
+        persistentVolumeClaim:
+          claimName: pvc-projects
+...
+
+

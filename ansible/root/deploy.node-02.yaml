@@ -1,14 +1,14 @@
 ###############################################################################
-##        Name: deploy.node-01.yaml                                           #
-##        Date: 24/01/2021                                                    #
-##     Version: v1.0                                                          #
+##        Name: deploy.node-02.yaml                                           #
+##        Date: 11/04/2021                                                    #
+##     Version: latest                                                        #
 ## Description: File to create a Deployment for:                              #
 ##              -> app: ansible                                               #
-##              -> image: rhel_ansible_node-_-v1.0                            #
+##              -> image: rhel_ansible_root_node-_-latest                     #
 ##              -> project: ansible                                           #
-##              -> role: node-01                                              #
+##              -> role: node-02                                              #
 ##----------------------------------------------------------------------------#
-##       Image: -> rhel_ansible_node-_-v1.0                                   #
+##       Image: -> rhel_ansible_root_node-_-latest                            #
 ##----------------------------------------------------------------------------#
 ##      Editor: José Manuel Plana Santos                                      #
 ##     Contact: dev.josemanuelps@gmail.com                                    #
@@ -20,34 +20,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deploy.ansible-node-01
+  name: deploy.ansible-node-02
   namespace: ns-ansible
   labels:
     app: ansible
-    image: rhel_ansible_node-_-v1.0
+    image: rhel_ansible_root_node-_-latest
     project: ansible
-    role: node-01
+    role: node-02
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: ansible
-      image: rhel_ansible_node-_-v1.0
+      image: rhel_ansible_root_node-_-latest
       project: ansible
-      role: node-01
+      role: node-02
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
         app: ansible
-        image: rhel_ansible_node-_-v1.0
+        image: rhel_ansible_root_node-_-latest
         project: ansible
-        role: node-01
+        role: node-02
     spec:
       containers:
-      - name: cont-ansible-node-01
-        image: docker.local:30500/docker_repo/rhel/ansible/node:v1.0
+      - name: cont-ansible-node-02
+        image: docker.local:30500/docker_repo/rhel/ansible/root/node:latest
         imagePullPolicy: IfNotPresent 
         ports:
           - containerPort: 22

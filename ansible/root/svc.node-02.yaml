@@ -1,0 +1,39 @@
+###############################################################################
+##        Name: svc.node-02.yaml                                              #
+##        Date: 04/01/2021                                                    #
+##     Version: v1.0                                                          #
+## Description: File to create a Service for:                                 #
+##              -> app: ansible                                               #
+##              -> project: ansible                                           #
+##              -> role: node-02                                              #
+##----------------------------------------------------------------------------#
+##       Ports: -> 22 === 22                                                  #
+##----------------------------------------------------------------------------#
+##      Editor: José Manuel Plana Santos                                      #
+##     Contact: dev.josemanuelps@gmail.com                                    #
+###############################################################################
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-ansible-node-02
+  namespace: ns-ansible
+  labels:
+    app: ansible
+    project: ansible
+    role: node-02
+spec:
+  ports:
+    - port: 22
+      protocol: TCP
+  selector:
+    app: ansible
+    project: ansible
+    role: node-02
+  type: ClusterIP
+...
+
+
