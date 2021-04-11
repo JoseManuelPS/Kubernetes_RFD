@@ -37,6 +37,7 @@ kubectl apply -f ~/projects/kubernetes_rfd/ansible/
 
 
 ---
+
 _Last test info:_
 - _Date: **unknown**_
 - _Base image versión: **unknown**_
@@ -114,6 +115,7 @@ docker pull docker.local:30500/docker_repo/hello_world:v1.0
 
 
 ---
+
 _Last test info:_
 - _Date: **unknown**_
 - _Base image versión: **unknown**_
@@ -223,9 +225,8 @@ docker pull docker.local:30500/<(repository_name)>/<(image_name:version)>
 ```
 docker pull docker.local:30500/docker_repo/hello_world:v1.0
 ```
-
-
 ---
+
 _Last test info:_
 - _Date: **11/04/2021**_
 - _Base image versión: **sonatype\_nexus3:3.29.0**_

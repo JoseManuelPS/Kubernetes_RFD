@@ -1,7 +1,6 @@
 ###############################################################################
 ##        Name: ns.ansible.yaml                                               #
 ##        Date: 29/12/2020                                                    #
-##     Version: v1.0                                                          #
 ## Description: File to create a namespace for:                               #
 ##              -> owner: ansible                                             #
 ##              -> target: kubernetes_rfd                                     #

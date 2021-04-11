@@ -1,7 +1,6 @@
 ###############################################################################
 ##        Name: svc.node-02.yaml                                              #
 ##        Date: 04/01/2021                                                    #
-##     Version: v1.0                                                          #
 ## Description: File to create a Service for:                                 #
 ##              -> app: ansible                                               #
 ##              -> project: ansible                                           #

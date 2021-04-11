@@ -1,13 +1,12 @@
 ###############################################################################
 ##        Name: deploy.nexus_repository.yaml                                  #
-##        Date: 09/01/2021                                                    #
-##     Version: v1.0                                                          #
+##        Date: 11/04/2021                                                    #
 ## Description: File to create a deployment for:                              #
-##              + app: nexus_repository                                       #
-##              + owner: nexus                                                #
-##              + target: kubernetes_rfd                                      #
+##              -> app: nexus_repository                                      #
+##              -> image: sonatype_nexus3_-_3.29.0                            #
+##              -> project: nexus_repository_oss                              #
 ##----------------------------------------------------------------------------#
-##     Version: -> sonatype_nexus3_-_3.29.0                                   #
+##       Image: -> sonatype_nexus3_-_3.29.0                                   #
 ##----------------------------------------------------------------------------#
 ##      Editor: José Manuel Plana Santos                                      #
 ##     Contact: dev.josemanuelps@gmail.com                                    #
@@ -23,26 +22,21 @@ metadata:
   namespace: ns-nexus
   labels:
     app: nexus_repository
-    owner: nexus
-    target: kubernetes_rfd
-    version: sonatype_nexus3_-_3.29.0
-    yaml_name: deploy.nexus_repository.yaml
-    yaml_version: v1.0
+    image: sonatype_nexus3_-_3.29.0 
+    project: nexus_repository_oss
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: nexus_repository
-      owner: nexus
-      target: kubernetes_rfd
-      version: sonatype_nexus3_-_3.29.0
+      image: sonatype_nexus3_-_3.29.0 
+      project: nexus_repository_oss
   template:
     metadata:
       labels:
         app: nexus_repository
-        owner: nexus
-        target: kubernetes_rfd
-        version: sonatype_nexus3_-_3.29.0
+        image: sonatype_nexus3_-_3.29.0 
+        project: nexus_repository_oss
     spec:
       containers:
       - name: cont-nexus
