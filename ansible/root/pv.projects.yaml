@@ -1,0 +1,36 @@
+###############################################################################
+##        Name: pv.projects.yaml                                              #
+##        Date: 09/01/2021                                                    #
+##     Version: v1.0                                                          #
+## Description: File to create a Persist Volume for:                          #
+##              -> app: ansible                                               #
+##              -> project: ansible                                           #
+##              -> role: master                                               #
+##----------------------------------------------------------------------------#
+##      Editor: José Manuel Plana Santos                                      #
+##     Contact: dev.josemanuelps@gmail.com                                    #
+###############################################################################
+
+
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-projects
+  namespace: ns-ansible
+  labels:
+    app: ansible
+    project: ansible
+    role: master
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 200Mi
+  hostPath:
+    path: '/home/docker/projects'
+  storageClassName: projects
+...
+
+
