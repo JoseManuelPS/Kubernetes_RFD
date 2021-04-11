@@ -109,7 +109,7 @@ docker pull docker.local:30500/<(repository_name)>/<(image_name:version)>
 
 ### Example pull instrucction:
 ```
-docker pull docker.local:32343/docker_repo/hello_world:v1.0
+docker pull docker.local:30500/docker_repo/hello_world:v1.0
 ```
 
 
@@ -157,8 +157,8 @@ kubectl create --save-config -f <(path_to_nexus_deployment)> -f <(path_to_nexus_
 
 ### Example deploy instrucction:
 ```
-kubectl create --save-config -f ~/projects/kubernetes_rfd/nexus_repository/ns.nexus_repository.yaml
-kubectl create --save-config -f ~/projects/kubernetes_rfd/nexus_repository/deploy.nexus_repository.yaml -f ~/projects/kubernetes_rfd/nexus_repository/ingress.nexus_repository.yaml -f ~/projects/kubernetes_rfd/nexus_repository/svc.nexus_repository.yaml
+kubectl create --save-config -f ~/projects/kubernetes_rfd/nexus_repository_oss/ns.nexus_repository.yaml
+kubectl apply -f ~/projects/kubernetes_rfd/nexus_repository_oss/
 ```
 
 
@@ -168,7 +168,7 @@ Now your Nexus Repository OSS it's ready. To use it, you must access to http://n
 
 Once you have successfully logged in, go to Settings>Security>Realms and enable `Docker Bearer Token Realm`.
 
-After the configuration is complete, you must create a new Docker repository as type `hosted` with the port `5000`.
+After the configuration is complete, you must create a new Docker repository as type `hosted` with the http port `5000` and Allow anonymous docker pull `enabled`.
 
 Once the deployment has been done, and the new Docker repository created you can connect to it following this steps:
 
@@ -176,7 +176,7 @@ Once the deployment has been done, and the new Docker repository created you can
 
 ```
 {
-    "insecure-registries" : [ "docker.local:30500>" ]
+    "insecure-registries" : [ "docker.local:30500" ]
 }
 ```
 
@@ -184,7 +184,7 @@ Once the deployment has been done, and the new Docker repository created you can
 ```
 systemctl stop docker.service docker.socket
 systemctl start docker.service
-minikube start
+minikube start --insecure-registry "docker.local:30500"
 ```
 
 - Connect from outside of minikube:
@@ -227,8 +227,9 @@ docker pull docker.local:30500/docker_repo/hello_world:v1.0
 
 ---
 _Last test info:_
-- _Date: **09/01/2021**_
+- _Date: **11/04/2021**_
 - _Base image versión: **sonatype\_nexus3:3.29.0**_
+- _Minikube versión: **v1.18.1**_
 
 ---
 
