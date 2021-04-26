@@ -1,7 +1,6 @@
 ###############################################################################
 ##        Name: pv.projects.yaml                                              #
 ##        Date: 09/01/2021                                                    #
-##     Version: v1.0                                                          #
 ## Description: File to create a Persist Volume for:                          #
 ##              -> app: ansible                                               #
 ##              -> project: ansible                                           #

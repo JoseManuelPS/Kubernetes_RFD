@@ -18,9 +18,11 @@ It is recommended to have a proprietary image repository such as Docker Registry
 
 
 
-## ansible
+## ansible/basic:v1.0
 
-This short tutorial explains in a simple way how to deploy an ansible laboratory based on https://github.com/JoseManuelPS/Docker_RFD ansible.
+This short tutorial explains in a simple way how to deploy an ansible laboratory based on https://github.com/JoseManuelPS/Docker_RFD ansible/basic.
+
+_Note: To mount volumes in minikube please use the following args. --mount=true --mount-string='/home/josemanuelps/projects:/home/docker/projects'_
 
 ### Recommended deploy instrucctions:
 ```
@@ -31,104 +33,55 @@ kubectl apply -f <(path_to_ansible_directory)>
 
 ### Example deploy instrucction:
 ```
-kubectl create --save-config -f ~/projects/kubernetes_rfd/ansible/ns.ansible.yaml
-kubectl apply -f ~/projects/kubernetes_rfd/ansible/
+kubectl create --save-config -f ~/projects/kubernetes_rfd/ansible/basic/ns.ansible.yaml
+kubectl apply -f ~/projects/kubernetes_rfd/ansible/basic
 ```
 
 
 ---
+
 _Last test info:_
-- _Date: **unknown**_
-- _Base image versión: **unknown**_
+- _Date: **25/04/2021**_
 
 ---
 
 
+## ansible/root:v1.0
 
-## nexus_repository_oss 
+This short tutorial explains in a simple way how to deploy an ansible laboratory based on https://github.com/JoseManuelPS/Docker_RFD ansible/root.
 
-This short tutorial explains in a simple way how to deploy the Nexus Repository OSS image repository (https://www.sonatype.com/nexus/repository-oss).
-
-**Important: A deployment is going to be carried out without certificates, if you want to carry out a deployment with certificates you can find more information at: https://help.sonatype.com/repomanager3**
-
+_Note: To mount volumes in minikube please use the following args. --mount=true --mount-string='/home/josemanuelps/projects:/home/docker/projects'_
 
 ### Recommended deploy instrucctions:
 ```
-kubectl create --save-config -f <(path_to_nexus_namespaces)>
-kubectl create --save-config -f <(path_to_nexus_deployment)> -f <(path_to_nexus_service)> -f <(path_to_nexus_ingress)>
+kubectl create --save-config -f <(path_to_ansible_namespaces)>
+kubectl apply -f <(path_to_ansible_directory)>
 ```
 
 
 ### Example deploy instrucction:
 ```
-kubectl create --save-config -f ~/projects/kubernetes_rfd/nexus_repository/ns.nexus_repository.yaml
-kubectl create --save-config -f ~/projects/kubernetes_rfd/nexus_repository/deploy.nexus_repository.yaml -f ~/projects/kubernetes_rfd/nexus_repository/ingress.nexus_repository.yaml -f ~/projects/kubernetes_rfd/nexus_repository/svc.nexus_repository.yaml
-```
-
-
-### Configure and access to your own Nexus Repository OSS.
-
-Now your Nexus Repository OSS it's ready. To use it, you must access to http://nexus.local (Remember modify your /etc/hosts), log in as `admin`, and complete the initial setup. After the configuration is complete, you must create a new Docker repository as type `hosted` with the port `5000`.
-
-Once the deployment has been done, and the new Docker repository created you can connect to it following this steps:
-
-- Create or modify the file /etc/docker/daemon.json to include the following content:
-```
-{
-    "insecure-registries" : [ "docker.local:30500" ]
-}
-```
-
-- Reset Docker daemon. 
-
-- Connect to repository:
-```
-docker login docker.local:30500
-```
-
-
-### Recommended push instrucctions:
-```
-docker tag <(image_name:version)> docker.local:30500/<(repository_name)>/<(image_name:version)>
-docker push docker.local:30500/<(repository_name)>/<(image_name:version)>
-```
-
-
-### Example push instrucction:
-```
-docker tag hello_world:v1.0 docker.local:30500/docker_repo/hello_world:v1.0
-docker push docker.local:30500/docker_repo/hello_world:v1.0
-```
-
-
-### Recommended pull instrucctions:
-```
-docker pull docker.local:30500/<(repository_name)>/<(image_name:version)>
-```
-
-
-### Example pull instrucction:
-```
-docker pull docker.local:30500/docker_repo/hello_world:v1.0
+kubectl create --save-config -f ~/projects/kubernetes_rfd/ansible/root/ns.ansible.yaml
+kubectl apply -f ~/projects/kubernetes_rfd/ansible/root
 ```
 
 
 ---
+
 _Last test info:_
-- _Date: **unknown**_
-- _Base image versión: **unknown**_
+- _Date: **25/04/2021**_
 
 ---
 
 
 
-## nexus_repository_oss (minikube version) 
+## nexus_repository_oss/minikube:v1.0
 
 This short tutorial explains in a simple way how to deploy the Nexus Repository OSS image repository (https://www.sonatype.com/nexus/repository-oss) inside of minikube.
 
 Start minikube with the parameter --insecure-registry, like this:
 ```
-minikube start --insecure-registry "docker.local:30500"
+minikube start --insecure-registry 'docker.local:30500'
 ```
 
 Add minikube ip to the /etc/hosts file with the following names:
@@ -157,8 +110,8 @@ kubectl create --save-config -f <(path_to_nexus_deployment)> -f <(path_to_nexus_
 
 ### Example deploy instrucction:
 ```
-kubectl create --save-config -f ~/projects/kubernetes_rfd/nexus_repository_oss/ns.nexus_repository.yaml
-kubectl apply -f ~/projects/kubernetes_rfd/nexus_repository_oss/
+kubectl create --save-config -f ~/projects/kubernetes_rfd/nexus_repository_oss/minikube/ns.nexus_repository.yaml
+kubectl apply -f ~/projects/kubernetes_rfd/nexus_repository_oss/minikube/
 ```
 
 
@@ -176,7 +129,7 @@ Once the deployment has been done, and the new Docker repository created you can
 
 ```
 {
-    "insecure-registries" : [ "docker.local:30500" ]
+    'insecure-registries' : [ 'docker.local:30500' ]
 }
 ```
 
@@ -184,7 +137,7 @@ Once the deployment has been done, and the new Docker repository created you can
 ```
 systemctl stop docker.service docker.socket
 systemctl start docker.service
-minikube start --insecure-registry "docker.local:30500"
+minikube start --insecure-registry 'docker.local:30500'
 ```
 
 - Connect from outside of minikube:
@@ -223,11 +176,10 @@ docker pull docker.local:30500/<(repository_name)>/<(image_name:version)>
 ```
 docker pull docker.local:30500/docker_repo/hello_world:v1.0
 ```
-
-
 ---
+
 _Last test info:_
-- _Date: **11/04/2021**_
+- _Date: **25/04/2021**_
 - _Base image versión: **sonatype\_nexus3:3.29.0**_
 - _Minikube versión: **v1.18.1**_
 

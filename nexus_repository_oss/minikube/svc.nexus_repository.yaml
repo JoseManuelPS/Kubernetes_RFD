@@ -1,11 +1,9 @@
 ###############################################################################
 ##        Name: svc.nexus_repository.yaml                                     #
-##        Date: 09/01/2021                                                    #
-##     Version: v1.0                                                          #
+##        Date: 11/04/2021                                                    #
 ## Description: File to create a service for:                                 #
-##              + app: nexus_repository                                       #
-##              + owner: nexus                                                #
-##              + target: kubernetes_rfd                                      #
+##              -> app: nexus_repository                                      #
+##              -> project: nexus_repository_oss                              #
 ##----------------------------------------------------------------------------#
 ##       Ports: -> 80 === 8081                                                #
 ##              -> 5000 === 5000                                              #
@@ -24,16 +22,12 @@ metadata:
   namespace: ns-nexus
   labels:
     app: nexus_repository
-    owner: nexus
-    target: kubernetes_rfd
-    yaml_name: svc.nexus_repository.yaml
-    yaml_version: v1.0
+    project: nexus_repository_oss
 spec:
   type: NodePort
   selector:
     app: nexus_repository
-    owner: nexus
-    target: kubernetes_rfd
+    project: nexus_repository_oss
   ports:
     - name: http
       port: 80

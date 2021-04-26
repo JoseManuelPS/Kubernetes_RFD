@@ -1,10 +1,9 @@
 ###############################################################################
 ##        Name: ns.nexus_repository.yaml                                      #
-##        Date: 09/01/2021                                                    #
-##     Version: v1.0                                                          #
+##        Date: 11/04/2021                                                    #
 ## Description: File to create a namespace for:                               #
-##              + owner: nexus                                                #
-##              + target: kubernetes_rfd                                      #
+##              -> app: nexus_repository                                      #
+##              -> project: nexus_repository_oss                              #
 ##----------------------------------------------------------------------------#
 ##      Editor: José Manuel Plana Santos                                      #
 ##     Contact: dev.josemanuelps@gmail.com                                    #
@@ -18,10 +17,8 @@ kind: Namespace
 metadata:
   name: ns-nexus
   labels:
-    owner: nexus
-    target: kubernetes_rfd
-    yaml_name: ns.nexus_repository.yaml
-    yaml_version: v1.0
+    app: nexus_repository
+    project: nexus_repository_oss
 ...
 
 

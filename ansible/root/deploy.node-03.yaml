@@ -1,7 +1,6 @@
 ###############################################################################
 ##        Name: deploy.node-03.yaml                                           #
-##        Date: 11/04/2021                                                    #
-##     Version: latest                                                        #
+##        Date: 19/04/2021                                                    #
 ## Description: File to create a Deployment for:                              #
 ##              -> app: ansible                                               #
 ##              -> image: ubuntu_ansible_root_node-_-latest                   #
@@ -20,7 +19,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deploy.ansible-node-03
+  name: deploy-ansible-node-03
   namespace: ns-ansible
   labels:
     app: ansible
