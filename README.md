@@ -129,7 +129,7 @@ Once the deployment has been done, and the new Docker repository created you can
 
 ```
 {
-    'insecure-registries' : [ 'docker.local:30500' ]
+    "insecure-registries": ["docker.local:30500"]
 }
 ```
 
