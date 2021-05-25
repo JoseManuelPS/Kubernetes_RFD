@@ -15,6 +15,7 @@
 # Imports.
 import argparse
 import os
+import stat
 
 # Definition of arguments.
 parser = argparse.ArgumentParser(description = 'This script allows you to create a series of files that contain the information necessary to set up a botnet in a kubernetes cluster.')
@@ -52,7 +53,6 @@ class Main:
 
     rules_file = open(args.path + 'rules/iptables.sh', 'w')
     rules_file.write('#!/bin/bash\n')
-    rules_file.write('iptables -t nat -A POSTROUTING -j MASQUERADE -o enp39s0\n')
     rules_file.close()
 
     for x in range(args.num):
@@ -66,6 +66,11 @@ class Main:
         self.create_svc_file(str(x))
         self.create_ansible_inventory_file(str(x))
         self.iptables_rules(str(x))
+
+    rules_file = open(args.path + 'rules/iptables.sh', 'a')
+    rules_file.write('iptables -t nat -A POSTROUTING -j MASQUERADE -o enp39s0\n')
+    rules_file.close()
+    os.chmod(args.path + 'rules/iptables.sh', stat.S_IRWXU)
 
     print ('Done!')
     exit(0)

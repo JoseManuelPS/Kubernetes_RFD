@@ -30,13 +30,11 @@ kubectl create --save-config -f <(path_to_ansible_namespaces)>
 kubectl apply -f <(path_to_ansible_directory)>
 ```
 
-
-### Example deploy instrucction:
+### Example deploy instrucctions:
 ```
 kubectl create --save-config -f ~/projects/kubernetes_rfd/ansible/basic/ns.ansible.yaml
 kubectl apply -f ~/projects/kubernetes_rfd/ansible/basic
 ```
-
 
 ---
 
@@ -60,13 +58,11 @@ kubectl create --save-config -f <(path_to_ansible_namespaces)>
 kubectl apply -f <(path_to_ansible_directory)>
 ```
 
-
-### Example deploy instrucction:
+### Example deploy instrucctions:
 ```
 kubectl create --save-config -f ~/projects/kubernetes_rfd/ansible/root/ns.ansible.yaml
 kubectl apply -f ~/projects/kubernetes_rfd/ansible/root
 ```
-
 
 ---
 
@@ -85,13 +81,13 @@ This short tutorial explains in a simple way how to deploy a botnet using the sc
 
 _Note: To mount volumes in minikube please use the following args. --mount=true --mount-string='/home/josemanuelps/projects:/home/docker/projects'_
 
-### Recommended master deploy instrucctions:
+### Recommended deploy instrucctions for master:
 ```
 kubectl create --save-config -f <(path_to_ansible_namespaces)>
 kubectl apply -f <(path_to_ansible_directory)>
 ```
 
-### Example master deploy instrucction:
+### Example deploy instrucctions for master:
 ```
 kubectl create --save-config -f ~/projects/kubernetes_rfd/botnet_generator/master/ns.botnet.yaml
 kubectl apply -f ~/projects/kubernetes_rfd/botnet_generator/master/
@@ -104,20 +100,17 @@ python3 ~/projects/kubernetes_rfd/botnet_generator/botnet_generator.py [-h] [--n
 
 ### Example instrucctions to create a new botnet:
 ```
-python3 ~/projects/kubernetes_rfd/botnet_generator/botnet_generator.py --name test --num 10 .
+python3 ~/projects/kubernetes_rfd/botnet_generator/botnet_generator.py --name test --num 10 new_botnet
 ```
 
-### Recommended master deploy instrucctions:
+### Recommended instrucctions to apply new iptables rules:
 ```
-kubectl create --save-config -f <(path_to_ansible_namespaces)>
-kubectl apply -f <(path_to_ansible_directory)>
+sudo <(new_botnet_path)>/rules/iptables.sh
 ```
 
-
-### Example master deploy instrucction:
+### Example instrucctions to apply new iptables rules:
 ```
-kubectl create --save-config -f ~/projects/kubernetes_rfd/botnet_generator/master/ns.botnet.yaml
-kubectl apply -f ~/projects/kubernetes_rfd/botnet_generator/master/
+sudo ./new_botnet/rules/iptables.sh
 ```
 
 ---
@@ -163,13 +156,11 @@ kubectl create --save-config -f <(path_to_nexus_namespaces)>
 kubectl create --save-config -f <(path_to_nexus_deployment)> -f <(path_to_nexus_service)> -f <(path_to_nexus_ingress)>
 ```
 
-
 ### Example deploy instrucction:
 ```
 kubectl create --save-config -f ~/projects/kubernetes_rfd/nexus_repository_oss/minikube/ns.nexus_repository.yaml
 kubectl apply -f ~/projects/kubernetes_rfd/nexus_repository_oss/minikube/
 ```
-
 
 ### Configure and access to your own Nexus Repository OSS.
 
@@ -207,13 +198,11 @@ eval $(minikube docker-env)
 docker login docker.local:30500
 ```
 
-
 ### Recommended push instrucctions:
 ```
 docker tag <(image_name:version)> docker.local:30500/<(repository_name)>/<(image_name:version)>
 docker push docker.local:30500/<(repository_name)>/<(image_name:version)>
 ```
-
 
 ### Example push instrucction:
 ```
@@ -221,17 +210,16 @@ docker tag hello_world:v1.0 docker.local:30500/docker_repo/hello_world:v1.0
 docker push docker.local:30500/docker_repo/hello_world:v1.0
 ```
 
-
 ### Recommended pull instrucctions:
 ```
 docker pull docker.local:30500/<(repository_name)>/<(image_name:version)>
 ```
 
-
 ### Example pull instrucction:
 ```
 docker pull docker.local:30500/docker_repo/hello_world:v1.0
 ```
+
 ---
 
 _Last test info:_
