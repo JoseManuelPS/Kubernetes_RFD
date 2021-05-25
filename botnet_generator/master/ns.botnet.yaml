@@ -1,8 +1,8 @@
 ###############################################################################
-##        Name: ns.rsync.yaml                                                 #
-##        Date: 19/05/2021                                                    #
+##        Name: ns.botnet.yaml                                                #
+##        Date: 25/05/2021                                                    #
 ## Description: File to create a namespace for:                               #
-##              -> owner: rsync                                               #
+##              -> owner: botnet_generator                                    #
 ##              -> target: kubernetes_rfd                                     #
 ##----------------------------------------------------------------------------#
 ##      Editor: José Manuel Plana Santos                                      #
@@ -15,9 +15,9 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: ns-rsync
+  name: ns-botnet
   labels:
-    owner: rsync
+    owner: botnet_generator
     target: kubernetes_rfd
 ...
 

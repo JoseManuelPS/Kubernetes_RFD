@@ -2,8 +2,8 @@
 ##        Name: svc.master.yaml                                               #
 ##        Date: 04/01/2021                                                    #
 ## Description: File to create a Service for:                                 #
-##              -> app: rsync                                                 #
-##              -> project: rsync                                             #
+##              -> app: botnet_generator                                      #
+##              -> project: botnet_generator                                  #
 ##              -> role: master                                               #
 ##----------------------------------------------------------------------------#
 ##       Ports: -> 22 === 22                                                  #
@@ -19,19 +19,19 @@ apiVersion: v1
 kind: Service
 metadata:
   name: svc-rsync-master
-  namespace: ns-rsync
+  namespace: ns-botnet
   labels:
-    app: rsync
-    project: rsync
+    app: botnet_generator
+    project: botnet_generator
     role: master
 spec:
   ports:
   - port: 22
     protocol: TCP
   selector:
-    app: rsync
+    app: botnet_generator
+    project: botnet_generator
     role: master
-    project: rsync
   type: ClusterIP
 ...
 

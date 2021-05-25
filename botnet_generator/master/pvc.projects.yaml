@@ -1,9 +1,9 @@
 ###############################################################################
 ##        Name: pvc.projects.yaml                                             #
-##        Date: 09/01/2021                                                    #
+##        Date: 25/05/2021                                                    #
 ## Description: File to create a Persist Volume Claim for:                    #
-##              -> app: rsync                                                 #
-##              -> project: rsync                                             #
+##              -> app: botnet_generator                                      #
+##              -> project: botnet_generator                                  #
 ##              -> role: master                                               #
 ##----------------------------------------------------------------------------#
 ##      Editor: José Manuel Plana Santos                                      #
@@ -17,22 +17,22 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: pvc-projects
-  namespace: ns-rsync
+  namespace: ns-botnet
   labels:
-    app: rsync
-    project: rsync
+    app: botnet_generator
+    project: botnet_generator
     role: master
 spec:
   accessModes:
-      - ReadWriteMany
+  - ReadWriteMany
   resources:
     requests:
-      storage: 200Mi
+      storage: 10Gi
   selector:
     matchLabels:
-      app: rsync
+      app: botnet_generator
+      project: botnet_generator
       role: master
-      project: rsync
   storageClassName: projects
 ...
 

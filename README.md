@@ -42,7 +42,6 @@ kubectl apply -f ~/projects/kubernetes_rfd/ansible/basic
 
 _Last test info:_
 - _Date: **25/05/2021**_
-- _Base image versión: **sonatype\_nexus3:3.29.0**_
 - _Minikube version: **v1.19.0**_
 - _Kubernetes version: **v1.20.2**_
 
@@ -73,7 +72,58 @@ kubectl apply -f ~/projects/kubernetes_rfd/ansible/root
 
 _Last test info:_
 - _Date: **25/05/2021**_
-- _Base image versión: **sonatype\_nexus3:3.29.0**_
+- _Minikube version: **v1.19.0**_
+- _Kubernetes version: **v1.20.2**_
+
+---
+
+
+
+## botnet_generator:v1.0
+
+This short tutorial explains in a simple way how to deploy a botnet using the script botnget_generator.py.
+
+_Note: To mount volumes in minikube please use the following args. --mount=true --mount-string='/home/josemanuelps/projects:/home/docker/projects'_
+
+### Recommended master deploy instrucctions:
+```
+kubectl create --save-config -f <(path_to_ansible_namespaces)>
+kubectl apply -f <(path_to_ansible_directory)>
+```
+
+### Example master deploy instrucction:
+```
+kubectl create --save-config -f ~/projects/kubernetes_rfd/botnet_generator/master/ns.botnet.yaml
+kubectl apply -f ~/projects/kubernetes_rfd/botnet_generator/master/
+```
+
+### Recommended instrucctions to create a new botnet:
+```
+python3 ~/projects/kubernetes_rfd/botnet_generator/botnet_generator.py [-h] [--name NAME] [--num NUM] path
+```
+
+### Example instrucctions to create a new botnet:
+```
+python3 ~/projects/kubernetes_rfd/botnet_generator/botnet_generator.py --name test --num 10 .
+```
+
+### Recommended master deploy instrucctions:
+```
+kubectl create --save-config -f <(path_to_ansible_namespaces)>
+kubectl apply -f <(path_to_ansible_directory)>
+```
+
+
+### Example master deploy instrucction:
+```
+kubectl create --save-config -f ~/projects/kubernetes_rfd/botnet_generator/master/ns.botnet.yaml
+kubectl apply -f ~/projects/kubernetes_rfd/botnet_generator/master/
+```
+
+---
+
+_Last test info:_
+- _Date: **25/05/2021**_
 - _Minikube version: **v1.19.0**_
 - _Kubernetes version: **v1.20.2**_
 

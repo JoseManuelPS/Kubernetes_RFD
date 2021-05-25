@@ -2,37 +2,40 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deploy-$APP$-$TEMPLATE$
-  namespace: ns-rsync
+  name: deploy-$BOTNET_NAME$-$BOT_NUMBER$
+  namespace: ns-botnet
   labels:
-    app: $APP$
+    app: $BOTNET_NAME$
+    bot_number: '$BOT_NUMBER$'
     image: rhel_ansible_basic_node-_-latest
-    mod: '$TEMPLATE$'
-    project: rsync
+    project: botnet_generator
+    role: bot
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: $APP$
+      app: $BOTNET_NAME$
+      bot_number: '$BOT_NUMBER$'
       image: rhel_ansible_basic_node-_-latest
-      mod: '$TEMPLATE$'
-      project: rsync
+      project: botnet_generator
+      role: bot
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: $APP$
+        app: $BOTNET_NAME$
+        bot_number: '$BOT_NUMBER$'
         image: rhel_ansible_basic_node-_-latest
-        mod: '$TEMPLATE$'
-        project: rsync
+        project: botnet_generator
+        role: bot
     spec:
       containers:
-      - name: cont-$APP$-$TEMPLATE$
+      - name: cont-$BOTNET_NAME$-$BOT_NUMBER$
         image: docker.local:30500/docker_repo/rhel/ansible/basic/node:latest
         imagePullPolicy: IfNotPresent 
         ports:
-          - containerPort: 22
+        - containerPort: 22
       restartPolicy: Always
 ...
 

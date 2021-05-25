@@ -1,10 +1,10 @@
 ###############################################################################
 ##        Name: deploy.master.yaml                                            #
-##        Date: 19/04/2021                                                    #
+##        Date: 25/05/2021                                                    #
 ## Description: File to create a Deployment for:                              #
-##              -> app: rsync                                                 #
+##              -> app: botnet_generator                                      #
 ##              -> image: rhel_ansible_basic_master-_-latest                  #
-##              -> project: rsync                                             #
+##              -> project: botnet_generator                                  #
 ##              -> role: master                                               #
 ##----------------------------------------------------------------------------#
 ##       Image: -> rhel_ansible_basic_master-_-latest                         #
@@ -20,28 +20,28 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: deploy-rsync-master
-  namespace: ns-rsync
+  namespace: ns-botnet
   labels:
-    app: rsync
+    app: botnet_generator
     image: rhel_ansible_basic_master-_-latest
-    project: rsync
+    project: botnet_generator
     role: master
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: rsync
+      app: botnet_generator
       image: rhel_ansible_basic_master-_-latest
-      project: rsync
+      project: botnet_generator
       role: master
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: rsync
+        app: botnet_generator
         image: rhel_ansible_basic_master-_-latest
-        project: rsync
+        project: botnet_generator
         role: master
     spec:
       containers:
@@ -51,10 +51,11 @@ spec:
         args: [ "while true; do sleep 300; done;" ]
         imagePullPolicy: IfNotPresent
         ports:
-          - containerPort: 22
+        - containerPort: 22
+        resources: {}
         volumeMounts:
-          - name: projects
-            mountPath: '/home/user/projects'
+        - name: projects
+          mountPath: '/home/user/projects'
       restartPolicy: Always
       volumes:
       - name: projects
