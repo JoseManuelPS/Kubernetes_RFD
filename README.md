@@ -123,6 +123,16 @@ sudo <(new_botnet_path)>/rules/iptables.sh
 sudo ./new_botnet/rules/iptables.sh
 ```
 
+### Recommended instrucctions to deploy botnet [Bots cluster]:
+```
+kubectl apply -f <(new_botnet_path)>
+```
+
+### Example instrucctions to deploy botnet [Bots cluster]:
+```
+kubectl apply -f new_botnet
+```
+
 ---
 
 _Last test info:_
