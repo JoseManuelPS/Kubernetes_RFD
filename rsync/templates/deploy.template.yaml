@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-$APP$-$TEMPLATE$
+  namespace: ns-rsync
+  labels:
+    app: $APP$
+    image: rhel_ansible_basic_node-_-latest
+    mod: '$TEMPLATE$'
+    project: rsync
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: $APP$
+      image: rhel_ansible_basic_node-_-latest
+      mod: '$TEMPLATE$'
+      project: rsync
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: $APP$
+        image: rhel_ansible_basic_node-_-latest
+        mod: '$TEMPLATE$'
+        project: rsync
+    spec:
+      containers:
+      - name: cont-$APP$-$TEMPLATE$
+        image: docker.local:30500/docker_repo/rhel/ansible/basic/node:latest
+        imagePullPolicy: IfNotPresent 
+        ports:
+          - containerPort: 22
+      restartPolicy: Always
+...
+
+

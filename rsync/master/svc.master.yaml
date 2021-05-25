@@ -1,0 +1,38 @@
+###############################################################################
+##        Name: svc.master.yaml                                               #
+##        Date: 04/01/2021                                                    #
+## Description: File to create a Service for:                                 #
+##              -> app: rsync                                                 #
+##              -> project: rsync                                             #
+##              -> role: master                                               #
+##----------------------------------------------------------------------------#
+##       Ports: -> 22 === 22                                                  #
+##----------------------------------------------------------------------------#
+##      Editor: José Manuel Plana Santos                                      #
+##     Contact: dev.josemanuelps@gmail.com                                    #
+###############################################################################
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-rsync-master
+  namespace: ns-rsync
+  labels:
+    app: rsync
+    project: rsync
+    role: master
+spec:
+  ports:
+  - port: 22
+    protocol: TCP
+  selector:
+    app: rsync
+    role: master
+    project: rsync
+  type: ClusterIP
+...
+
+

@@ -41,7 +41,10 @@ kubectl apply -f ~/projects/kubernetes_rfd/ansible/basic
 ---
 
 _Last test info:_
-- _Date: **25/04/2021**_
+- _Date: **25/05/2021**_
+- _Base image versión: **sonatype\_nexus3:3.29.0**_
+- _Minikube version: **v1.19.0**_
+- _Kubernetes version: **v1.20.2**_
 
 ---
 
@@ -69,7 +72,10 @@ kubectl apply -f ~/projects/kubernetes_rfd/ansible/root
 ---
 
 _Last test info:_
-- _Date: **25/04/2021**_
+- _Date: **25/05/2021**_
+- _Base image versión: **sonatype\_nexus3:3.29.0**_
+- _Minikube version: **v1.19.0**_
+- _Kubernetes version: **v1.20.2**_
 
 ---
 
@@ -181,7 +187,8 @@ docker pull docker.local:30500/docker_repo/hello_world:v1.0
 _Last test info:_
 - _Date: **25/04/2021**_
 - _Base image versión: **sonatype\_nexus3:3.29.0**_
-- _Minikube versión: **v1.18.1**_
+- _Minikube version: **v1.19.0**_
+- _Kubernetes version: **v1.20.2**_
 
 ---
 

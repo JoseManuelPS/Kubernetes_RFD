@@ -1,0 +1,65 @@
+###############################################################################
+##        Name: deploy.master.yaml                                            #
+##        Date: 19/04/2021                                                    #
+## Description: File to create a Deployment for:                              #
+##              -> app: rsync                                                 #
+##              -> image: rhel_ansible_basic_master-_-latest                  #
+##              -> project: rsync                                             #
+##              -> role: master                                               #
+##----------------------------------------------------------------------------#
+##       Image: -> rhel_ansible_basic_master-_-latest                         #
+##----------------------------------------------------------------------------#
+##      Editor: José Manuel Plana Santos                                      #
+##     Contact: dev.josemanuelps@gmail.com                                    #
+###############################################################################
+
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-rsync-master
+  namespace: ns-rsync
+  labels:
+    app: rsync
+    image: rhel_ansible_basic_master-_-latest
+    project: rsync
+    role: master
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rsync
+      image: rhel_ansible_basic_master-_-latest
+      project: rsync
+      role: master
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: rsync
+        image: rhel_ansible_basic_master-_-latest
+        project: rsync
+        role: master
+    spec:
+      containers:
+      - name: cont-rsync-master
+        image: docker.local:30500/docker_repo/rhel/ansible/basic/master:latest
+        command: [ "/bin/bash", "-c", "--" ]
+        args: [ "while true; do sleep 300; done;" ]
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 22
+        volumeMounts:
+          - name: projects
+            mountPath: '/home/user/projects'
+      restartPolicy: Always
+      volumes:
+      - name: projects
+        persistentVolumeClaim:
+          claimName: pvc-projects
+...
+
+

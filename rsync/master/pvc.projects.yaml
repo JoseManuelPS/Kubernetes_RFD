@@ -1,0 +1,39 @@
+###############################################################################
+##        Name: pvc.projects.yaml                                             #
+##        Date: 09/01/2021                                                    #
+## Description: File to create a Persist Volume Claim for:                    #
+##              -> app: rsync                                                 #
+##              -> project: rsync                                             #
+##              -> role: master                                               #
+##----------------------------------------------------------------------------#
+##      Editor: José Manuel Plana Santos                                      #
+##     Contact: dev.josemanuelps@gmail.com                                    #
+###############################################################################
+
+
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-projects
+  namespace: ns-rsync
+  labels:
+    app: rsync
+    project: rsync
+    role: master
+spec:
+  accessModes:
+      - ReadWriteMany
+  resources:
+    requests:
+      storage: 200Mi
+  selector:
+    matchLabels:
+      app: rsync
+      role: master
+      project: rsync
+  storageClassName: projects
+...
+
+

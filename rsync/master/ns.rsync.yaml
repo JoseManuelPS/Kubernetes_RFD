@@ -1,0 +1,24 @@
+###############################################################################
+##        Name: ns.rsync.yaml                                                 #
+##        Date: 19/05/2021                                                    #
+## Description: File to create a namespace for:                               #
+##              -> owner: rsync                                               #
+##              -> target: kubernetes_rfd                                     #
+##----------------------------------------------------------------------------#
+##      Editor: José Manuel Plana Santos                                      #
+##     Contact: dev.josemanuelps@gmail.com                                    #
+###############################################################################
+
+
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ns-rsync
+  labels:
+    owner: rsync
+    target: kubernetes_rfd
+...
+
+
