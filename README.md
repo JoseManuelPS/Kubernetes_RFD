@@ -81,34 +81,44 @@ This short tutorial explains in a simple way how to deploy a botnet using the sc
 
 _Note: To mount volumes in minikube please use the following args. --mount=true --mount-string='/home/josemanuelps/projects:/home/docker/projects'_
 
-### Recommended deploy instrucctions for master:
+### Recommended deploy instrucctions for master [Master controller]:
 ```
 kubectl create --save-config -f <(path_to_ansible_namespaces)>
 kubectl apply -f <(path_to_ansible_directory)>
 ```
 
-### Example deploy instrucctions for master:
+### Example deploy instrucctions for master [Master controller]:
 ```
 kubectl create --save-config -f ~/projects/kubernetes_rfd/botnet_generator/master/ns.botnet.yaml
 kubectl apply -f ~/projects/kubernetes_rfd/botnet_generator/master/
 ```
 
-### Recommended instrucctions to create a new botnet:
+### Recommended deploy instrucctions of namespace  [Bots cluster]:
+```
+kubectl create --save-config -f <(path_to_namespaces)>
+```
+
+### Example deploy instrucctions of namespace  [Bots cluster]:
+```
+kubectl create --save-config -f ~/projects/kubernetes_rfd/botnet_generator/master/ns.botnet.yaml
+```
+
+### Recommended instrucctions to create a new botnet [Bots cluster]:
 ```
 python3 ~/projects/kubernetes_rfd/botnet_generator/botnet_generator.py [-h] [--name NAME] [--num NUM] path
 ```
 
-### Example instrucctions to create a new botnet:
+### Example instrucctions to create a new botnet [Bots cluster]:
 ```
 python3 ~/projects/kubernetes_rfd/botnet_generator/botnet_generator.py --name test --num 10 new_botnet
 ```
 
-### Recommended instrucctions to apply new iptables rules:
+### Recommended instrucctions to apply new iptables rules [Bots cluster]:
 ```
 sudo <(new_botnet_path)>/rules/iptables.sh
 ```
 
-### Example instrucctions to apply new iptables rules:
+### Example instrucctions to apply new iptables rules [Bots cluster]:
 ```
 sudo ./new_botnet/rules/iptables.sh
 ```
