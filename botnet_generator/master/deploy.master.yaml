@@ -1,0 +1,66 @@
+###############################################################################
+##        Name: deploy.master.yaml                                            #
+##        Date: 25/05/2021                                                    #
+## Description: File to create a Deployment for:                              #
+##              -> app: botnet_generator                                      #
+##              -> image: rhel_ansible_basic_master-_-latest                  #
+##              -> project: botnet_generator                                  #
+##              -> role: master                                               #
+##----------------------------------------------------------------------------#
+##       Image: -> rhel_ansible_basic_master-_-latest                         #
+##----------------------------------------------------------------------------#
+##      Editor: José Manuel Plana Santos                                      #
+##     Contact: dev.josemanuelps@gmail.com                                    #
+###############################################################################
+
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-botnet-master
+  namespace: ns-botnet
+  labels:
+    app: botnet_generator
+    image: rhel_ansible_basic_master-_-latest
+    project: botnet_generator
+    role: master
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: botnet_generator
+      image: rhel_ansible_basic_master-_-latest
+      project: botnet_generator
+      role: master
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: botnet_generator
+        image: rhel_ansible_basic_master-_-latest
+        project: botnet_generator
+        role: master
+    spec:
+      containers:
+      - name: cont-rsync-master
+        image: docker.local:30500/docker_repo/rhel/ansible/basic/master:latest
+        command: [ "/bin/bash", "-c", "--" ]
+        args: [ "while true; do sleep 300; done;" ]
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 22
+        resources: {}
+        volumeMounts:
+        - name: projects
+          mountPath: '/home/user/projects'
+      restartPolicy: Always
+      volumes:
+      - name: projects
+        persistentVolumeClaim:
+          claimName: pvc-projects
+...
+
+

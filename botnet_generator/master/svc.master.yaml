@@ -1,0 +1,38 @@
+###############################################################################
+##        Name: svc.master.yaml                                               #
+##        Date: 04/01/2021                                                    #
+## Description: File to create a Service for:                                 #
+##              -> app: botnet_generator                                      #
+##              -> project: botnet_generator                                  #
+##              -> role: master                                               #
+##----------------------------------------------------------------------------#
+##       Ports: -> 22 === 22                                                  #
+##----------------------------------------------------------------------------#
+##      Editor: José Manuel Plana Santos                                      #
+##     Contact: dev.josemanuelps@gmail.com                                    #
+###############################################################################
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-botnet-master
+  namespace: ns-botnet
+  labels:
+    app: botnet_generator
+    project: botnet_generator
+    role: master
+spec:
+  ports:
+  - port: 22
+    protocol: TCP
+  selector:
+    app: botnet_generator
+    project: botnet_generator
+    role: master
+  type: ClusterIP
+...
+
+

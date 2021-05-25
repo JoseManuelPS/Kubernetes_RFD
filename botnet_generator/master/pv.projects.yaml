@@ -1,0 +1,35 @@
+###############################################################################
+##        Name: pv.projects.yaml                                              #
+##        Date: 25/05/2021                                                    #
+## Description: File to create a Persist Volume for:                          #
+##              -> app: botnet_generator                                      #
+##              -> project: botnet_generator                                  #
+##              -> role: master                                               #
+##----------------------------------------------------------------------------#
+##      Editor: José Manuel Plana Santos                                      #
+##     Contact: dev.josemanuelps@gmail.com                                    #
+###############################################################################
+
+
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-projects
+  namespace: ns-botnet
+  labels:
+    app: botnet_generator
+    project: botnet_generator
+    role: master
+spec:
+  accessModes:
+  - ReadWriteMany
+  capacity:
+    storage: 10Gi
+  hostPath:
+    path: '/home/docker/projects'
+  storageClassName: projects
+...
+
+

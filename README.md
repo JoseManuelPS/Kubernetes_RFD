@@ -30,18 +30,18 @@ kubectl create --save-config -f <(path_to_ansible_namespaces)>
 kubectl apply -f <(path_to_ansible_directory)>
 ```
 
-
-### Example deploy instrucction:
+### Example deploy instrucctions:
 ```
 kubectl create --save-config -f ~/projects/kubernetes_rfd/ansible/basic/ns.ansible.yaml
 kubectl apply -f ~/projects/kubernetes_rfd/ansible/basic
 ```
 
-
 ---
 
 _Last test info:_
-- _Date: **25/04/2021**_
+- _Date: **25/05/2021**_
+- _Minikube version: **v1.19.0**_
+- _Kubernetes version: **v1.20.2**_
 
 ---
 
@@ -58,18 +58,87 @@ kubectl create --save-config -f <(path_to_ansible_namespaces)>
 kubectl apply -f <(path_to_ansible_directory)>
 ```
 
-
-### Example deploy instrucction:
+### Example deploy instrucctions:
 ```
 kubectl create --save-config -f ~/projects/kubernetes_rfd/ansible/root/ns.ansible.yaml
 kubectl apply -f ~/projects/kubernetes_rfd/ansible/root
 ```
 
+---
+
+_Last test info:_
+- _Date: **25/05/2021**_
+- _Minikube version: **v1.19.0**_
+- _Kubernetes version: **v1.20.2**_
+
+---
+
+
+
+## botnet_generator:v1.0
+
+This short tutorial explains in a simple way how to deploy a botnet using the script botnget_generator.py.
+
+_Note: To mount volumes in minikube please use the following args. --mount=true --mount-string='/home/josemanuelps/projects:/home/docker/projects'_
+
+### Recommended deploy instrucctions for master [Master controller]:
+```
+kubectl create --save-config -f <(path_to_ansible_namespaces)>
+kubectl apply -f <(path_to_ansible_directory)>
+```
+
+### Example deploy instrucctions for master [Master controller]:
+```
+kubectl create --save-config -f ~/projects/kubernetes_rfd/botnet_generator/master/ns.botnet.yaml
+kubectl apply -f ~/projects/kubernetes_rfd/botnet_generator/master/
+```
+
+### Recommended deploy instrucctions of namespace  [Bots cluster]:
+```
+kubectl create --save-config -f <(path_to_namespaces)>
+```
+
+### Example deploy instrucctions of namespace  [Bots cluster]:
+```
+kubectl create --save-config -f ~/projects/kubernetes_rfd/botnet_generator/master/ns.botnet.yaml
+```
+
+### Recommended instrucctions to create a new botnet [Bots cluster]:
+```
+python3 ~/projects/kubernetes_rfd/botnet_generator/botnet_generator.py [-h] [--name NAME] [--num NUM] path
+```
+
+### Example instrucctions to create a new botnet [Bots cluster]:
+```
+python3 ~/projects/kubernetes_rfd/botnet_generator/botnet_generator.py --name test --num 10 new_botnet
+```
+
+### Recommended instrucctions to apply new iptables rules [Bots cluster]:
+```
+sudo <(new_botnet_path)>/rules/iptables.sh
+```
+
+### Example instrucctions to apply new iptables rules [Bots cluster]:
+```
+sudo ./new_botnet/rules/iptables.sh
+```
+
+### Recommended instrucctions to deploy botnet [Bots cluster]:
+```
+kubectl apply -f <(new_botnet_path)>
+```
+
+### Example instrucctions to deploy botnet [Bots cluster]:
+```
+kubectl apply -f new_botnet
+```
 
 ---
 
 _Last test info:_
-- _Date: **25/04/2021**_
+- _Date: **25/05/2021**_
+- _Minikube version: **v1.19.0**_
+- _Kubernetes version: **v1.20.2**_
 
 ---
 
@@ -107,13 +176,11 @@ kubectl create --save-config -f <(path_to_nexus_namespaces)>
 kubectl create --save-config -f <(path_to_nexus_deployment)> -f <(path_to_nexus_service)> -f <(path_to_nexus_ingress)>
 ```
 
-
 ### Example deploy instrucction:
 ```
 kubectl create --save-config -f ~/projects/kubernetes_rfd/nexus_repository_oss/minikube/ns.nexus_repository.yaml
 kubectl apply -f ~/projects/kubernetes_rfd/nexus_repository_oss/minikube/
 ```
-
 
 ### Configure and access to your own Nexus Repository OSS.
 
@@ -151,13 +218,11 @@ eval $(minikube docker-env)
 docker login docker.local:30500
 ```
 
-
 ### Recommended push instrucctions:
 ```
 docker tag <(image_name:version)> docker.local:30500/<(repository_name)>/<(image_name:version)>
 docker push docker.local:30500/<(repository_name)>/<(image_name:version)>
 ```
-
 
 ### Example push instrucction:
 ```
@@ -165,23 +230,23 @@ docker tag hello_world:v1.0 docker.local:30500/docker_repo/hello_world:v1.0
 docker push docker.local:30500/docker_repo/hello_world:v1.0
 ```
 
-
 ### Recommended pull instrucctions:
 ```
 docker pull docker.local:30500/<(repository_name)>/<(image_name:version)>
 ```
 
-
 ### Example pull instrucction:
 ```
 docker pull docker.local:30500/docker_repo/hello_world:v1.0
 ```
+
 ---
 
 _Last test info:_
 - _Date: **25/04/2021**_
 - _Base image versión: **sonatype\_nexus3:3.29.0**_
-- _Minikube versión: **v1.18.1**_
+- _Minikube version: **v1.19.0**_
+- _Kubernetes version: **v1.20.2**_
 
 ---
 

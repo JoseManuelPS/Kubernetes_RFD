@@ -1,0 +1,24 @@
+###############################################################################
+##        Name: ns.botnet.yaml                                                #
+##        Date: 25/05/2021                                                    #
+## Description: File to create a namespace for:                               #
+##              -> owner: botnet_generator                                    #
+##              -> target: kubernetes_rfd                                     #
+##----------------------------------------------------------------------------#
+##      Editor: José Manuel Plana Santos                                      #
+##     Contact: dev.josemanuelps@gmail.com                                    #
+###############################################################################
+
+
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ns-botnet
+  labels:
+    owner: botnet_generator
+    target: kubernetes_rfd
+...
+
+

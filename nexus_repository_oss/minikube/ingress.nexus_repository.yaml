@@ -1,6 +1,6 @@
 ###############################################################################
 ##        Name: ingress.nexus_repository.yaml                                 #
-##        Date: 22/05/2021                                                    #
+##        Date: 11/04/2021                                                    #
 ## Description: File to create a service for:                                 #
 ##              -> app: nexus_repository                                      #
 ##              -> project: nexus_repository_oss                              #
@@ -19,26 +19,26 @@ metadata:
   namespace: ns-nexus
   annotations:
     ingress.kubernetes.io/proxy-body-size: 100m
-    kubernetes.io/ingress.class: nginx
+    kubernetes.io/ingress.class: "nginx"
   labels:
     app: nexus_repository
     project: nexus_repository_oss
 spec:
   rules:
-  - host: nexus.local
+  - host: "nexus.local"
     http:
       paths:
-      - path: /
+      - path: "/"
         pathType: Prefix
         backend:
           service:
             name: svc-nexus
             port:
               number: 80
-  - host: docker.local
+  - host: "docker.local"
     http:
       paths:
-      - path: /
+      - path: "/"
         pathType: Prefix
         backend:
           service:

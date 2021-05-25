@@ -1,0 +1,39 @@
+###############################################################################
+##        Name: pvc.projects.yaml                                             #
+##        Date: 25/05/2021                                                    #
+## Description: File to create a Persist Volume Claim for:                    #
+##              -> app: botnet_generator                                      #
+##              -> project: botnet_generator                                  #
+##              -> role: master                                               #
+##----------------------------------------------------------------------------#
+##      Editor: José Manuel Plana Santos                                      #
+##     Contact: dev.josemanuelps@gmail.com                                    #
+###############################################################################
+
+
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-projects
+  namespace: ns-botnet
+  labels:
+    app: botnet_generator
+    project: botnet_generator
+    role: master
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 10Gi
+  selector:
+    matchLabels:
+      app: botnet_generator
+      project: botnet_generator
+      role: master
+  storageClassName: projects
+...
+
+

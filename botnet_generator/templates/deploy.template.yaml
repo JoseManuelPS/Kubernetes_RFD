@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-$BOTNET_NAME$-$BOT_NUMBER$
+  namespace: ns-botnet
+  labels:
+    app: $BOTNET_NAME$
+    bot_number: '$BOT_NUMBER$'
+    image: rhel_ansible_basic_node-_-latest
+    project: botnet_generator
+    role: bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: $BOTNET_NAME$
+      bot_number: '$BOT_NUMBER$'
+      image: rhel_ansible_basic_node-_-latest
+      project: botnet_generator
+      role: bot
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: $BOTNET_NAME$
+        bot_number: '$BOT_NUMBER$'
+        image: rhel_ansible_basic_node-_-latest
+        project: botnet_generator
+        role: bot
+    spec:
+      containers:
+      - name: cont-$BOTNET_NAME$-$BOT_NUMBER$
+        image: docker.local:30500/docker_repo/rhel/ansible/basic/node:latest
+        imagePullPolicy: IfNotPresent 
+        ports:
+        - containerPort: 22
+      restartPolicy: Always
+...
+
+
