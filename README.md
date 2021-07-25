@@ -138,6 +138,7 @@ kubectl apply -f new_botnet
 ---
 
 _Last test info:_
+
 - _Date: **25/05/2021**_
 - _Minikube version: **v1.19.0**_
 - _Kubernetes version: **v1.20.2**_
@@ -146,7 +147,7 @@ _Last test info:_
 
 
 
-## nexus_repository_oss/minikube:v1.0
+## nexus_repository_oss/minikube:v1.1
 
 This short tutorial explains in a simple way how to deploy the Nexus Repository OSS image repository (https://www.sonatype.com/nexus/repository-oss) inside of minikube.
 
@@ -186,7 +187,7 @@ kubectl apply -f ~/projects/kubernetes_rfd/nexus_repository_oss/minikube/
 
 ### Configure and access to your own Nexus Repository OSS.
 
-Now your Nexus Repository OSS it's ready. To use it, you must access to http://nexus.local address, log in as `admin`, and complete the initial setup. 
+Now your Nexus Repository OSS it's ready. To use it, you must access to http://nexus.local:30501 address, log in as `admin`, and complete the initial setup. 
 
 Once you have successfully logged in, go to Settings>Security>Realms and enable `Docker Bearer Token Realm`.
 
@@ -245,10 +246,11 @@ docker pull docker.local:30500/docker_repo/hello_world:v1.0
 ---
 
 _Last test info:_
-- _Date: **25/04/2021**_
-- _Base image versión: **sonatype\_nexus3:3.29.0**_
-- _Minikube version: **v1.19.0**_
-- _Kubernetes version: **v1.20.2**_
+
+- _Date: **25/07/2021**_
+- _Base image versión: **sonatype\_nexus3:3.32.0**_
+- _Minikube version: **v1.22.0**_
+- _Kubernetes version: **v1.21.2**_
 
 ---
 

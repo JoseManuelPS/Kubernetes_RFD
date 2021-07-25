@@ -1,12 +1,12 @@
 ###############################################################################
 ##        Name: deploy.nexus_repository.yaml                                  #
-##        Date: 11/04/2021                                                    #
+##        Date: 25/07/2021                                                    #
 ## Description: File to create a deployment for:                              #
 ##              -> app: nexus_repository                                      #
-##              -> image: sonatype_nexus3_-_3.29.0                            #
+##              -> image: sonatype_nexus3_-_3.32.0                            #
 ##              -> project: nexus_repository_oss                              #
 ##----------------------------------------------------------------------------#
-##       Image: -> sonatype_nexus3_-_3.29.0                                   #
+##       Image: -> sonatype_nexus3_-_3.32.0                                   #
 ##----------------------------------------------------------------------------#
 ##      Editor: José Manuel Plana Santos                                      #
 ##     Contact: dev.josemanuelps@gmail.com                                    #
@@ -22,25 +22,25 @@ metadata:
   namespace: ns-nexus
   labels:
     app: nexus_repository
-    image: sonatype_nexus3_-_3.29.0 
+    image: sonatype_nexus3_-_3.32.0 
     project: nexus_repository_oss
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: nexus_repository
-      image: sonatype_nexus3_-_3.29.0 
+      image: sonatype_nexus3_-_3.32.0 
       project: nexus_repository_oss
   template:
     metadata:
       labels:
         app: nexus_repository
-        image: sonatype_nexus3_-_3.29.0 
+        image: sonatype_nexus3_-_3.32.0 
         project: nexus_repository_oss
     spec:
       containers:
       - name: cont-nexus
-        image: sonatype/nexus3:3.29.0
+        image: sonatype/nexus3:3.32.0
         imagePullPolicy: Always
         ports:
         - containerPort: 8081
