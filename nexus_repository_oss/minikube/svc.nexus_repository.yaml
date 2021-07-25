@@ -1,11 +1,11 @@
 ###############################################################################
 ##        Name: svc.nexus_repository.yaml                                     #
-##        Date: 11/04/2021                                                    #
+##        Date: 25/07/2021                                                    #
 ## Description: File to create a service for:                                 #
 ##              -> app: nexus_repository                                      #
 ##              -> project: nexus_repository_oss                              #
 ##----------------------------------------------------------------------------#
-##       Ports: -> 80 === 8081                                                #
+##       Ports: -> 8081 === 8081                                              #
 ##              -> 5000 === 5000                                              #
 ##----------------------------------------------------------------------------#
 ##      Editor: José Manuel Plana Santos                                      #
@@ -30,8 +30,8 @@ spec:
     project: nexus_repository_oss
   ports:
     - name: http
-      port: 80
-      targetPort: 8081
+      port: 8081
+      nodePort: 30501
       protocol: TCP
     - name: docker
       port: 5000
