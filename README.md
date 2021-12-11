@@ -40,9 +40,9 @@ kubectl apply -f ~/projects/kubernetes_rfd/ansible/basic
 
 _Last test info:_
 
-- _Date: **25/05/2021**_
-- _Minikube version: **v1.19.0**_
-- _Kubernetes version: **v1.20.2**_
+- _Date: **25/07/2021**_
+- _Minikube version: **v1.22.0**_
+- _Kubernetes version: **v1.21.2**_
 
 ---
 
